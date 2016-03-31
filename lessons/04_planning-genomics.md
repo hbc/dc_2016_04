@@ -1,6 +1,6 @@
 ---
 layout: lesson
-title: Genomics data - Metadata and tidiness
+title: Planning for NGS projects
 minutes: 20
 ---
 
@@ -11,7 +11,7 @@ minutes: 20
 
 ## Lesson 
 
-There are a variety ways to approach working with a large sequencing dataset. You may be a novice who has not used bioinformatics tools beyond doing BLAST searches. You may have bioinformatics experience with other types of data and are working with high-throughput (NGS) sequence data for the first time. Either way, these lessons for you! In the most important ways, the methods and approaches we need in bioinformatics are the same ones we need at the bench or in the field - planning, documenting, and organizing  will be the key to good reproducible science. 
+There are a variety ways to approach working with a large sequencing dataset. You may be a novice who has not used bioinformatics tools beyond doing BLAST searches. You may have bioinformatics experience with other types of data and are working with high-throughput (NGS) sequence data for the first time. Either way, these lessons for you! In the most important ways, the methods and approaches we need in bioinformatics are the same ones we need at the bench or in the field - *planning, documenting, and organizing* will be the key to good reproducible science. 
 
 ## Discussion Questions
 
@@ -59,7 +59,7 @@ When the data come back from the facility, you will receive some documentation (
 2. If you wanted to relate file names to the sample names submitted above (e.g. wild type...) could you do so?
 3. What do the \_R1/\_R2 extensions mean in the file names?
 4. What does the '.gz' extension on the filenames indicate?
-5. What is the total file size - what challenges in downloading and sharing these data might exsist?
+5. What is the total file size - what challenges in downloading and sharing these data might exist?
 
 #### Summary 
 

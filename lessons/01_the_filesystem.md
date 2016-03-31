@@ -40,7 +40,7 @@ For the duration of this workshop, we will be accessing the shell on a remote co
 
 - Their computer does not have enough resources to run the desired analysis (memory, processors, disk space, network bandwidth).
 - Their computer is taking hours or days to get through an analysis.
-- They cannot install software on your computer (application does not have support for your operating system, conflicts with other existing applications, etc.)
+- They cannot install software on their computer (application does not have support for their operating system, conflicts with other existing applications, etc.)
 
 We will spend most of our time learning about the basics of the shell by manipulating some experimental data. Since we are going to be working with this data on the cloud, we first need to log onto a remote computer.
 
@@ -123,28 +123,7 @@ You should also have a blinking cursor awaiting your command
 dcuser@ip-172-31-62-209 ~ $
 ```
 
-## How to access the shell
-
-The shell is already available on Mac and Linux. For Windows, you'll
-have to download a separate program.
-
-
-###Mac
- 
-On Mac the shell is available through Terminal  
-Applications -> Utilities -> Terminal  
-Go ahead and drag the Terminal application to your Dock for easy access.
-
-###Windows
-
-For Windows, we're going to be using gitbash.  
-Download and install [gitbash](http://msysgit.github.io);
-Open up the program.
-
-###Linux  
-
-The shell is available by default when you connect to your AWS instance.  You should be set.
-
+## Accessing the data?
 
 ## Starting with the shell
 
@@ -152,7 +131,7 @@ Let's explore the data in the `dc_sample_data`  directory:
 
 	$ cd dc_sample_data
 
-'cd' stands for 'change directory'
+> `cd` stands for 'change directory'
 
 Let's see what is inside the folder. Type:
 
@@ -725,12 +704,14 @@ We're going to come back and use this file in just a bit.
 
 ### Learning resources on the shell
 
-shell cheat sheets:<br>
+Shell cheat sheets:<br>
+
 * [http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/](http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/)
 * [https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md](https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md)
 
 Explain shell - a web site where you can see what the different components of
 a shell command are doing.  
+
 * [http://explainshell.com](http://explainshell.com)
 * [http://www.commandlinefu.com](http://www.commandlinefu.com)
 

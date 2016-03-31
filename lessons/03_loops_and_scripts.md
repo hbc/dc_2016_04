@@ -28,12 +28,12 @@ We are going to take the commands we repeat frequently and save them into a file
 1. Tell us what is our current working directory
 2. Lists the contents of the directory 
 
-First let's move into the `unix_lesson` directory and open a new file using `vim`:
+First let's move into the `unix_lesson` directory and open a new file using `nano`:
 
 	$ cd ~/ngs_course/unix_lesson
-	$ vim listing.sh
+	$ nano listing.sh
 	
-Change to insert mode, then type in the following lines in the `listing.sh` file:
+Type in the following lines in the `listing.sh` file:
 
 	echo "Your current working directory is:"
 	pwd
@@ -42,7 +42,7 @@ Change to insert mode, then type in the following lines in the `listing.sh` file
 
 >The `echo` command is a utility for writing to standard output. By providing text in quotations after the command we indicated what it is we wanted written
 
-Save the file and exit `vim`. Now let's run the new script we have created. To run a shell script you usually use the `bash` or `sh` command.
+Save the file and exit `nano`. Now let's run the new script we have created. To run a shell script you usually use the `bash` or `sh` command.
 
 	$ sh listing.sh
 	
@@ -53,13 +53,14 @@ Save the file and exit `vim`. Now let's run the new script we have created. To r
 This is a very simple shell script. In this session and in upcoming sessions, we will be learning how to write more complex ones. You will see how the power of scripts can make our lives much easier.
 
 ## Bash variables
+
 A *variable* is a common concept shared by many programming languages. Variables are essentially a symbolic/temporary name for, or a reference to, some information. Variables are analogous to "buckets", where information can be stored, maintained and modified without too much hassle. 
 
 Extending the bucket analogy: the bucket has a name associated with it, i.e. the name of the variable, and when referring to the information in the bucket, we use the name of the bucket, and do not directly refer to the actual data stored in it.
 
-In the example below, we define a variable or a 'bucket' called `file`. We will put a filename `Mov10_oe_1.subset.fq` as the value inside the bucket.
+In the example below, we define a variable or a 'bucket' called `file`. We will put a filename `SRR098026.fastq` as the value inside the bucket.
 
-	$ file=Mov10_oe_1.subset.fq
+	$ file=SRR098026.fastq
 
 Once you press return, you should be back at the command prompt. *How do we know that we actually created the bash variable?* We can use the echo command to list what's inside `file`:
 
@@ -69,20 +70,20 @@ What do you see in the terminal? If the variable was not created, the command wi
 
 Well, in the former, we're setting the value, while in the latter, we're retrieving the value. This is standard shell notation (syntax) for defining and using variables. **Don't forget the `$` when you want to retrieve the value of a variable!** 
 
-Let's try another command using the variable that we have created. In the last lesson, we introduced the `wc -l` command which allows us to count the number of lines in a file. We can count the number of lines in `Mov10_oe_1.subset.fq` by referencing the `file` variable, but first move into the `raw_fastq` directory:
+Let's try another command using the variable that we have created. In the last lesson, we introduced the `wc -l` command which allows us to count the number of lines in a file. We can count the number of lines in `SRR098026.fastq` by referencing the `file` variable, but first move into the `untrimmed_fastq` directory:
 
-	$ cd ~/ngs_course/unix_lesson/raw_fastq
+	$ cd ~/dc_sample_data/untrimmed_fastq
 	$ wc -l $file
 
-Ok, so we know variables are like buckets, and so far we have seen that bucket filled with a single value. **Variables can store more than just a single value.** They can store multiple values and in this way can be useful to carry out many things at once. Let's create a new variable called `filenames` and this time we will store *all of the filenames* in the `raw_fastq` directory as values. 
+Ok, so we know variables are like buckets, and so far we have seen that bucket filled with a single value. **Variables can store more than just a single value.** They can store multiple values and in this way can be useful to carry out many things at once. Let's create a new variable called `filenames` and this time we will store *both of the filenames* in the `untrimmed_fastq` directory as values. 
 
-To list all the filenames in the directory that have a `.fq` extension, we know the command is:
+To list all the filenames in the directory that have a `.fastq` extension, we know the command is:
 
-	$ ls *.fq
+	$ ls *.fastq
 	
 Now we want to *assign* the output of `ls` to the variable. We will give that variable the name `filenames`:
 
-	$ filenames=`ls *.fq`
+	$ filenames=`ls *.fastq`
 
 Check and see what's stored inside our newly created variable using `echo`:
 	
@@ -116,9 +117,9 @@ where the ***variable_name*** defines (or initializes) a variable that takes the
 For example, we can run the same commands (`echo` and `wc -l`) used in the "Bash variables" section but this time run them sequentially on each file:
 
 ```
-$ ls  *.fq		# list all files ending in .fq
+$ ls  *.fastq		# list all files ending in .fastq
 
-$ for var in *.fq
+$ for var in *.fastq
 > do
 >   echo $var
 >   wc -l $var
@@ -126,16 +127,16 @@ $ for var in *.fq
 ```
 
 ####What does this loop do? 
-Most simply, it writes to the terminal (`echo`) the name of the file and the number of lines (`wc -l`) for each files that end in `.fq` in the current directory. The output is almost identical to what we had before.
+Most simply, it writes to the terminal (`echo`) the name of the file and the number of lines (`wc -l`) for each files that end in `.fastq` in the current directory. The output is almost identical to what we had before.
 
-In this case the list of files is specified using the asterisk wildcard: `*.fq`, i.e. all files that end in `.fq`. Then, we execute 2 commands between the `do` and `done`. With a loop, we execute these commands for each file at a time. Once the commands are executed for one file, the loop then executes the same commands on the next file in the list. 
+In this case the list of files is specified using the asterisk wildcard: `*.fastq`, i.e. all files that end in `.fastq`. Then, we execute 2 commands between the `do` and `done`. With a loop, we execute these commands for each file at a time. Once the commands are executed for one file, the loop then executes the same commands on the next file in the list. 
 
-Essentially, **the number of loops == the number of items in the list**, in our case that is 6 times since we have 6 files in `~/ngs_course/unix_lesson/raw_fastq` that end in `.fq`. This is done by changing the value of the `var` variable 6 times. 
+Essentially, **the number of loops == the number of items in the list**, in our case that is 2 times since we have 2 files in `~/dc_sample_data/untrimmed_fastq` that end in `.fastq`. This is done by changing the value of the `var` variable 2 times. 
 
 Of course, `var` is a useless variable name. But since it doesn't matter what variable name we use, we can make it something more intuitive.
 
 ```bash
-$ for filename in *.fq
+$ for filename in *.fastq
 > do
 >   echo $filename
 >   wc -l $filename
@@ -156,9 +157,9 @@ Now that you've learned how to use loops and variables, let's put this processin
 
 You might not realize it, but this is something that you now know how to do. Let's get started...
 
-Rather than doing all of this in the terminal we are going to create a script file with all relevant commands. Use `vim` to create our new script file:
+Rather than doing all of this in the terminal we are going to create a script file with all relevant commands. Use `nano` to create our new script file:
 
-`$ vim generate_bad_reads_summary.sh`
+`$ nano generate_bad_reads_summary.sh`
 
 We always want to start our scripts with a shebang line: 
 
@@ -166,16 +167,16 @@ We always want to start our scripts with a shebang line:
 
 This line is the absolute path to the Bash interpreter. The shebang line ensures that the bash shell interprets the script even if it is executed using a different shell.
 
-After the shebang line, we enter the commands we want to execute. First we want to move into our `raw_fastq` directory:
+After the shebang line, we enter the commands we want to execute. First we want to move into our `untrimmed_fastq` directory:
 
 ```
-$ cd ~/ngs_course/unix_lesson/raw_fastq
+$ cd ~/dc_sample_data/untrimmed_fastq
 ```
 
 And now we loop over all the FASTQs:
 
 ```bash
-for filename in *.fq;
+for filename in *.fastq;
 ```
 
 and we execute the commands for each loop:
@@ -211,9 +212,9 @@ You're script should look like:
 ```bash
 #!/bin/bash
 
-cd ~/ngs_course/unix_lesson/raw_fastq
+cd ~/dc_sample_data/untrimmed_fastq
 
-for filename in ~/ngs_course/unix_lesson/raw_fastq/*.fq; do 
+for filename in *.fastq; do 
 echo $filename;
 grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq;
 grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary;
@@ -223,16 +224,16 @@ cat bad-reads.count.summary >> ../runlog.txt
 
 ```
 
-Exit out of `vim`, and voila! You now have a script you can use to assess the quality of all your new datasets. Your finished script, complete with comments, should look like the following:
+Save and exit `nano`, and voila! You now have a script you can use to assess the quality of all your new datasets. Your finished script, complete with comments, should look like the following:
 
 ```bash
 #!/bin/bash 
 
 # enter directory with raw FASTQs
-cd ~/ngs_course/unix_lesson/raw_fastq
+cd ~/dc_sample_data/untrimmed_fastq
 
 # count bad reads for each FASTQ file in our directory
-for filename in ~/ngs_course/unix_lesson/raw_fastq/*.fq; do 
+for filename in *.fastq; do 
   echo $filename; 
 
   # grab all the bad read records
@@ -253,9 +254,11 @@ To run this script, we simply enter the following command:
 $ bash generate_bad_reads_summary.sh
 ```
 
-To keep your data organized, let's move all of the bad read files out of our `raw_fastq` directory into the `other` directory
+To keep your data organized, let's move all of the bad read files out of our `untrimmed_fastq` directory into a new directory called `other`.
 
-`$ mv ~/ngs_course/unix_lesson/raw_fastq/*bad* ~/ngs_course/unix_lesson/other`
+`$ mkdir ../other`
+
+`$ mv ~/dc_sample_data/untrimmed_fastq/*bad* ~/dc_sample_data/other`
 
 
 ---

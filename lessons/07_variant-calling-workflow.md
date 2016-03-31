@@ -15,47 +15,44 @@ Learning Objectives:
 
 #### Setting up
 
-To get started with this lesson, ensure you are logged into the cluster and are working
-in an interactive session on a compute node (single core):
+To get started with this lesson, we will need to grab some data from an outside
+server using `wget` on the command line.
+
+Make sure you are in the dc_workshop directory first
 
 ```bash
-ssh rcusername@login.rc.fas.harvard.edu
-(enter password)
-(enter 2FA 6-digit code, no spaces)
-srun --pty -p interact --mem 500 -n 1 -N 1 -t 0-06:00 /bin/bash
+$ cd ~/dc_workshop
+$ wget http://reactomerelease.oicr.on.ca/download/archive/variant_calling.tar.gz
 ```
 
-*Next, and **you may have already done this yesterday**, we will need to grab some data from an outside server using `wget` on the command line.*
-
-*Make sure you are in the dc_workshop directory first before running the following command:*
-    
-    wget http://devbioinfoguy.github.io/wrangling-genomics-HPC/data/variant_calling.tar.gz
-
-*The file 'variant_calling.tar.gz' is what is commonly called a **"tarball"**, which is
+The file 'variant_calling.tar.gz' is what is commonly called a "tarball", which is
 a compressed archive similar to the .zip files we have seen before.  We can decompress
-this archive using the command below.*
+this archive using the command below.
 
-    tar xvf variant_calling.tar.gz
+```bash
+$ tar -zxvf variant_calling.tar.gz
+```
+This will create a directory tree that contains some input data (reference genome and fastq files)
+and a shell script that details the series of commands used to run the variant calling workflow.
 
-*This will create a directory tree that contains some input data (reference genome and fastq files) and a shell script that details the series of commands used to run the variant calling workflow.*
+<pre>
+variant_calling
+├── ref_genome
+│   └── ecoli_rel606.fasta
+├── run_variant_calling.sh
+└── trimmed_fastq
+    ├── SRR097977.fastq
+    ├── SRR098026.fastq
+    ├── SRR098027.fastq
+    ├── SRR098028.fastq
+    ├── SRR098281.fastq
+    └── SRR098283.fastq
+</pre>
 
-	variant_calling
-	├── data
-	│   ├── ref_genome
-	│   │   └── ecoli_rel606.fasta
-	│   └── trimmed_fastq
-	│       ├── SRR097977.fastq
-	│       ├── SRR098026.fastq
-	│       ├── SRR098027.fastq
-	│       ├── SRR098028.fastq
-	│       ├── SRR098281.fastq
-	│       └── SRR098283.fastq
-	└── run_variant_calling.sh
-
-Without getting into the details yet, the variant calling workflow will do the following steps:
+Without getting into the details yet, the variant calling workflow will do the following steps
 
 1. Index the reference genome for use by bwa and samtools
-2. Align reads to reference genome using bwa
+2. Align reads to reference genome
 3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
 4. Calculate the read coverage of positions in the genome
 5. Detect the single nucleotide polymorphisms (SNPs)
@@ -73,15 +70,9 @@ The first command is to change to our working directory:
 
      cd variant_calling
 
-Let's load up some of the modules we need for this section:
-
-     source new-modules.sh
-     module load bwa
-     module load samtools
-     module load bcftools
-
-
-Index the reference genome for use by bwa and samtools:
+#### Index the reference genome
+Index the reference genome for use by bwa and samtools. bwa
+and samtools are programs that are pre-installed on our server:
     
 	bwa index data/ref_genome/ecoli_rel606.fasta     # This step helps with the speed of alignment
 	
@@ -112,27 +103,32 @@ cp ~/dc_workshop/variant_calling/data/trimmed_fastq/SRR098283.fastq \
  ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq
 ```
 
-#### Alignment to genome
+#### Align reads to reference genome
+
 The alignment process consists of choosing an appropriate reference genome to map our reads against, and performing the read alignment using one of several alignment tools such as [NovoAlign](http://www.novocraft.com/main/page.php?s=novoalign) or [BWA](https://github.com/lh3/bwa). 
 
-The usage for bwa is `bwa aln genome.fasta fastq > SAIfile`
+The usage for bwa is `bwa aln path/to/ref_genome.fasta path/to/fastq > SAIfile`
     
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. NOTE: Always read the manual page for any tool before using and try to understand the options.
 
-    bwa aln data/ref_genome/ecoli_rel606.fasta ../data/trimmed_fastq/ \
-    SRR098283.fastq_trim.fastq > results/sai/SRR098283.trimmed.aligned.sai
+    bwa aln data/ref_genome/ecoli_rel606.fasta \
+    ../data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
+    results/sai/SRR098283.trimmed.aligned.sai
 
-Convert the output to the SAM format. Usage: `bwa samse genome.fasta SAIfile fastq > SAMfile`
+#### Convert the format of the alignment to sorted BAM
 
-	bwa samse data/ref_genome/ecoli_rel606.fasta results/sai/ \
-	SRR098283.trimmed.aligned.sai ../data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
+Before we convert to BAM format, we need to first convert the output to the SAM format. Usage: `bwa samse path/to/ref_genome.fasta path/to/SAIfile path/to/fastq > SAMfile`
+
+	bwa samse data/ref_genome/ecoli_rel606.fasta \
+	results/sai/SRR098283.trimmed.aligned.sai \
+	../data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
 	results/sam/SRR098283.trimmed.aligned.sam
 
-We already know about the information within a [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#aligned-reads-sam). Let's take a quick look at the one we just created:
+Explore the information within a [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#aligned-reads-sam):
 
 	head results/sam/SRR098283.trimmed.aligned.sam
 	
-Convert the SAM file to BAM format: 
+Now convert the SAM file to BAM format for use by downstream tools: 
 
     samtools view -S -b results/sam/SRR098283.trimmed.aligned.sam > \
     results/bam/SRR098283.trimmed.aligned.bam
@@ -144,7 +140,7 @@ Sort the BAM file:
 
 *SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.*
 
-#### Assess the alignment (visualization)
+#### Assess the alignment (visualization) - optional step
 
 Index the BAM file for visualization with IGV:
 
@@ -167,6 +163,8 @@ Using FileZilla, transfer the following 3 files to your local machine,
 
 #### Call variants
 
+##### Step 1: Calculate the read coverage of positions in the genome
+
 Do the first pass on variant calling by counting read coverage with samtools [mpileup](http://samtools.sourceforge.net/mpileup.shtml):
 
     samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
@@ -174,9 +172,13 @@ Do the first pass on variant calling by counting read coverage with samtools [mp
 
 ***We have only generated a file with coverage information for every base with the above command; to actually identify variants, we have to use a different tool from the samtools suite called [bcftools](https://samtools.github.io/bcftools/bcftools.html).***
 
-Do the SNP calling with bcftools:
+##### Step 2: Detect the single nucleotide polymorphisms (SNPs)
+
+Identify SNPs using bcftools:
 
     bcftools call -vc -O b results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
+
+##### Step 3: Filter and report the SNP variants in VCF (variant calling format)
 
 Filter the SNPs for the final output in VCF format, using vcfutils.pl:
 
@@ -185,7 +187,7 @@ Filter the SNPs for the final output in VCF format, using vcfutils.pl:
 	
 *`bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform the filtering. Note that the output is in VCF format, which is a text format.*
 
-Explore the VCF format, that we have already learned a little bit about [earlier](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#called-genotypes-vcf):
+Explore the VCF format:
 
 	less results/vcf/SRR098283_final_variants.vcf
 
@@ -298,16 +300,9 @@ And we'll add a shortcut to store the location to the genome reference FASTA fil
      # location to genome reference FASTA file
      genome=data/ref_genome/ecoli_rel606.fasta
 
-Make sure you are loading all the correct modules/tools for the script to run:
-    
-    # set up our software environment...
-    source new-modules.sh
-    module load bwa
-    module load samtools
-    module load bcftools
 
 Now, walking thru the code, we can make some substitutions. To index with bwa and samtools
-we can run those commands on the genome variable ($genome) so these value aren't 
+we can run those commands on the genome variable ($genome) so these values aren't 
 static & hardcoded:
 
      bwa index $genome
@@ -324,7 +319,7 @@ results will be as well. We'll leave that for an optional exercise)
      mkdir -p results/bcf
      mkdir -p results/vcf
 
-In the script, it is a good idea to use echo for debugging/reporting to the screen
+In the script, it is a good idea to use `echo` for debugging/reporting to the screen
 
     echo "Processing file $fq ..."
 
@@ -353,7 +348,7 @@ is going on in the sommand below.
 
 Our data are now staged.  We now need to change the series of command below
 to use our variables so that it will run with more flexibility the steps of the 
-analytical workflow>
+analytical workflow:
 
     # Align the reads to the reference genome
     bwa aln $genome $fq > $sai
@@ -383,7 +378,7 @@ This new script is now ready for running:
 	
 	sh run_variant_call_on_file.sh <name of fastq>
 
-#### Exercise IV - Parallelizing workflow for efficiency
+#### Exercise IV - Parallelizing workflow for efficiency - NEEDS TO CHANGE
 
 To run the same script on a worker node on the cluster via the job scheduler, we need to add our **SLURM directives** at the **beginning** of the script. This is so that the scheduler knows what resources we need in order to run our job on the
 compute node(s). 
