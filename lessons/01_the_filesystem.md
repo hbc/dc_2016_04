@@ -123,8 +123,6 @@ You should also have a blinking cursor awaiting your command
 dcuser@ip-172-31-62-209 ~ $
 ```
 
-## Accessing the data?
-
 ## Starting with the shell
 
 Let's explore the data in the `dc_sample_data`  directory:
