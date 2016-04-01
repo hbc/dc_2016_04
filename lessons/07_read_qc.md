@@ -102,7 +102,7 @@ Here, we see positions within the read in which the boxes span a much wider rang
 
 The *FASTQC* tool produces several other diagnostic plots to assess sample quality, in addition to the one plotted above. 
 
-#### Set-up
+#### Project set-up
 
 Project organization is one of the most important parts of a sequencing project, but is often overlooked in the excitement to get a first look at new data. 
 
@@ -119,13 +119,12 @@ Your future self will thank you.
     # this command takes us to the home directory
     
     $ mkdir dc_workshop
+    $ cd dc_workshop
     ```
 2. Create three three subdirectories
 
    ```bash
-    mkdir dc_workshop/data
-    mkdir dc_workshop/docs
-    mkdir dc_workshop/results
+    mkdir data docs results
 	```
 
 3. Move our sample data to our working (home) directory
