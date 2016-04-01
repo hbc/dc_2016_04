@@ -302,7 +302,6 @@ SLIDINGWINDOW:4:20 MINLEN:20
 Quality encoding detected as phred33
 Input Reads: 249 Surviving: 234 (93.98%) Dropped: 15 (6.02%)
 TrimmomaticSE: Completed successfully
-
 ```
 
 So that worked and we have a new fastq file.
