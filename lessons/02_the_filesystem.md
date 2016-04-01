@@ -549,8 +549,9 @@ By default, `rm`, will NOT delete directories. You can tell `rm` to
 delete a directory using the `-r` option. Let's delete our `backup` and `new_backup` directories
 we just made. Enter the following command:
 
-	$ rm -r backup new_backup
-
+	$ rm -r backup
+	$ rm -r new_backup
+	
 ## Writing files
 
 We've been able to do a lot of work with files that already exist, but what
