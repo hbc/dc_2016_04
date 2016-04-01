@@ -114,7 +114,7 @@ Now using `cd` and `ls`, go in to the `dc_sample_data` directory and list its co
 Let's also check to see where we are. Sometimes when we're wandering around
 in the file system, it's easy to lose track of where we are and get lost.
 
-If you want to know what directory you're currently in, type
+If you want to know what directory you're currently in, type:
 
 	$ pwd
 
@@ -182,7 +182,9 @@ List the 'SRR097977.fastq' file from your home directory without changing direct
 
 ##### Shortcut: Tab Completion
 
-Navigate to the home directory. Typing out directory names can waste a
+Navigate to the home directory. 
+
+Typing out directory names can waste a
 lot of time. When you start typing out the name of a directory, then
 hit the tab key, the shell will try to fill in the rest of the
 directory name. For example, type `cd` to get back to your home directy, then enter:
