@@ -427,7 +427,8 @@ What does this file contain?
 `cat` is a terrific command, but when the file is really big, it should be avoided; `less`, is preferred for files larger than a few bytes. Let's take a look at the fastq files in `untrimmed_fastq`. These files are quite large, so we probably do not want to use the `cat` command to look at them. Instead, we can use the `less` command. 
 
 Move back to the `untrimmed_fastq` directory and enter the following command:
-
+	
+	$ cd ~/dc_sample_data/untrimmed_fastq/
 	$ less SRR098026.fastq
 
 `less` opens the file, and lets you navigate through it. The commands
