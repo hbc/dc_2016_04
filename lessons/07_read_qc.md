@@ -112,54 +112,21 @@ Your future self will thank you.
 
 ##### Creating an NGS project directory structure  
 
-1. Create a working directory for your NGS analysis
-   
-    ```bash
-    $ cd
-    # this command takes us to the home directory
-    
-    $ mkdir dc_workshop
-    $ cd dc_workshop
-    ```
-2. Create three three subdirectories
+Create a working directory for your NGS analysis
 
-    ```bash
-    $ mkdir data docs results
-    ```
+	$ cd
+	# this command takes us to the home directory
 
-3. Copy data from an outside
-server using `wget` on the command line.
+	$ mkdir dc_workshop
+	$ cd dc_workshop
 
-	```bash
-	$ wget http://reactomerelease.oicr.on.ca/download/archive/variant_calling.tar.gz
-	```
+Create three three subdirectories
 
-	The file 'variant_calling.tar.gz' is what is commonly called a "tarball", which is
-a compressed archive similar to the .zip files we have seen before.  We can decompress
-this archive using the command below.
+	$ mkdir data docs results
 
-	```bash
-	$ tar -zxvf variant_calling.tar.gz
-	```
-	This will create a directory tree that contains some input data (reference genome and fastq files)
-and a shell script that details the series of commands used to run the variant calling workflow.
+Move our sample data to our working (home) directory
 
-	<pre>
-	variant_calling
-	├── ref_genome
-	│   └── ecoli_rel606.fasta
-	├── run_variant_calling.sh
-	└── trimmed_fastq
-	    ├── SRR097977.fastq
-	    ├── SRR098026.fastq
-	    ├── SRR098027.fastq
-	    ├── SRR098028.fastq
-	    ├── SRR098281.fastq
-	    └── SRR098283.fastq
-	</pre>
-
-
-
+	$ mv ~/dc_sample_data/untrimmed_fastq/ ~/dc_workshop/data/
 
 #### Run FastQC
 
