@@ -530,7 +530,7 @@ important, let's rename it:
 
 Finally, we decided this was silly and want to start over.
 
-    rm backup/SRR*
+    rm SRR*
 
 > The `rm` file permanently removes the file. Be careful with this command. The shell doesn't
 just nicely put the files in the Trash, they're really gone!
