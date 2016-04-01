@@ -11,9 +11,9 @@ Learning Objectives:
 * Automate a workflow by grouping a series of sequential commands into a script
 * Modify and submit the workflow script to the cluster
 
-## Running a Workflow
+# Running a Workflow
 
-#### Setting up
+## Setting up
 
 To get started with this lesson, we will need to grab some data from an outside
 server using `wget` on the command line.
@@ -50,14 +50,9 @@ variant_calling
 └── run_variant_calling.sh
 </pre>
 
-Without getting into the details yet, the variant calling workflow will do the following steps
+Remember the variant calling workflow.
 
-1. Index the reference genome for use by bwa and samtools
-2. Align reads to reference genome
-3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
-4. Calculate the read coverage of positions in the genome
-5. Detect the single nucleotide polymorphisms (SNPs)
-6. Filter and report the SNP variants in VCF (variant calling format)
+![workflow](../img/variant_calling_workflow.png)
 
 We'll first perform the commands for all the above steps (run through the workflow). 
 
@@ -67,119 +62,129 @@ Finally, we'll modify the script to run on the cluster.
 
 So let's get started.
 
-The first command is to change to our working directory:
+Change directories to the `variant_calling` directory:
 
-     cd variant_calling
+	$ cd ~/dc_workshop/variant_calling     
 
-#### Index the reference genome
-Index the reference genome for use by bwa and samtools. bwa
-and samtools are programs that are pre-installed on our server:
+Create the directory structure for our results:
+
+	$ mkdir -p results/sai results/sam results/bam results/bcf results/vcf
+
+## Alignment to a reference genome
+
+Since the quality control steps have already been completed, and we are starting with trimmed reads, we can start our workflow with alignment of our quality reads to the reference genome.
+
+![workflow_align](../img/variant_calling_workflow_align.png)
+
+We perform read alignment or mapping to determine where in the genome our reads originated from. The alignment process consists of two steps:
+
+1. Indexing the reference genome
+2. Aligning the reads to the reference genome
+
+### Index the reference genome
+Our first step is to index the reference genome for use by BWA. BWA
+is a program that is pre-installed on our server:
     
 	bwa index data/ref_genome/ecoli_rel606.fasta     # This step helps with the speed of alignment
 	
-	samtools faidx data/ref_genome/ecoli_rel606.fasta     # We will need the indexed reference file for variant calling as well. 
-
-
-Create output paths for various intermediate and results files. The `-p` option means mkdir will create the whole path if it does not exist and refrain from complaining if it does exist
-```bash
-mkdir -p results/sai
-mkdir -p results/sam
-mkdir -p results/bam
-mkdir -p results/bcf
-mkdir -p results/vcf
-```
-
 In the script, we will eventually loop over all of our files and have the cluster work
 on each one in parallel. For now, we're going to work on just one to set up our workflow:
 
 ```bash
-ls -alh ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq
+ls -alh ~/dc_workshop/variant_calling/data/trimmed_fastq/SRR098283.fastq
 ```
 
-**NOTE: if you did not follow the last section, please execute the following command:**
-
-```bash
-mkdir -p ~/dc_workshop/data/trimmed_fastq/
-cp ~/dc_workshop/variant_calling/data/trimmed_fastq/SRR098283.fastq \
- ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq
-```
-
-#### Align reads to reference genome
+### Align reads to reference genome
 
 The alignment process consists of choosing an appropriate reference genome to map our reads against, and performing the read alignment using one of several alignment tools such as [NovoAlign](http://www.novocraft.com/main/page.php?s=novoalign) or [BWA](https://github.com/lh3/bwa). 
 
-The usage for bwa is `bwa aln path/to/ref_genome.fasta path/to/fastq > SAIfile`
+The usage for BWA is `bwa aln path/to/ref_genome.fasta path/to/fastq > SAIfile`
     
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. NOTE: Always read the manual page for any tool before using and try to understand the options.
 
     bwa aln data/ref_genome/ecoli_rel606.fasta \
-    ../data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
-    results/sai/SRR098283.trimmed.aligned.sai
+    data/trimmed_fastq/SRR098283.fastq > \
+    results/sai/SRR098283.aligned.sai
 
-#### Convert the format of the alignment to sorted BAM
+## Alignment cleanup
+
+![workflow_clean](../img/variant_calling_workflow_cleanup.png)
+
+Post-alignment processing of the alignment file includes:
+
+1. Converting output SAI alignment file to a BAM file
+2. Sorting the BAM file by coordinate
+
+### Convert the format of the alignment to BAM
 
 Before we convert to BAM format, we need to first convert the output to the SAM format. Usage: `bwa samse path/to/ref_genome.fasta path/to/SAIfile path/to/fastq > SAMfile`
 
 	bwa samse data/ref_genome/ecoli_rel606.fasta \
-	results/sai/SRR098283.trimmed.aligned.sai \
-	../data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
-	results/sam/SRR098283.trimmed.aligned.sam
+	results/sai/SRR098283.aligned.sai \
+	data/trimmed_fastq/SRR098283.fastq > \
+	results/sam/SRR098283.aligned.sam
 
 Explore the information within a [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#aligned-reads-sam):
 
-	head results/sam/SRR098283.trimmed.aligned.sam
+	head results/sam/SRR098283.aligned.sam
 	
 Now convert the SAM file to BAM format for use by downstream tools: 
 
-    samtools view -S -b results/sam/SRR098283.trimmed.aligned.sam > \
-    results/bam/SRR098283.trimmed.aligned.bam
+    samtools view -S -b results/sam/SRR098283.aligned.sam > \
+    results/bam/SRR098283.aligned.bam
+
+### Sort BAM file by coordinates -- doesn't work!
 
 Sort the BAM file:
 
-    samtools sort -O bam -T temp.prefix results/bam/SRR098283.trimmed.aligned.bam > \
-    results/bam/SRR098283.trimmed.aligned.sorted.bam
+    samtools sort -O bam -T temp.prefix results/bam/SRR098283.aligned.bam > \
+    results/bam/SRR098283.aligned.sorted.bam
 
 *SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.*
 
-#### Assess the alignment (visualization) - optional step
+### Assess the alignment (visualization) - optional step
 
 Index the BAM file for visualization with IGV:
 
-    samtools index results/bam/SRR098283.trimmed.aligned.sorted.bam
+    samtools index results/bam/SRR098283.aligned.sorted.bam
 
 **Transfer files to your laptop**
 
 Using FileZilla, transfer the following 3 files to your local machine, 
-`results/bam/SRR098283.trimmed.aligned.sorted.bam`,
+`results/bam/SRR098283.aligned.sorted.bam`,
 
-`results/bam/SRR098283.trimmed.aligned.sorted.bam.bai`, 
+`results/bam/SRR098283.aligned.sorted.bam.bai`, 
 
 `data/ref_genome/ecoli_rel606.fasta`
 
-**Visualize**
+**Visualize**	
 
 * Start [IGV](https://www.broadinstitute.org/software/igv/download)
 * Load the genome file into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
 * Load the .bam file using the **"Load from File..."** option under the **"File"** pull-down menu. *IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, but there is no direct use for that file.*
 
-#### Call variants
+## Call variants
 
-##### Step 1: Calculate the read coverage of positions in the genome
+![workflow](../img/variant_calling_workflow.png)
+
+### Step 1: Calculate the read coverage of positions in the genome
 
 Do the first pass on variant calling by counting read coverage with samtools [mpileup](http://samtools.sourceforge.net/mpileup.shtml):
 
+	samtools faidx data/ref_genome/ecoli_rel606.fasta     # We will a reference genome index using samtools for variant calling as well 
+
     samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
-      results/bam/SRR098283.trimmed.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
+      results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
 
 ***We have only generated a file with coverage information for every base with the above command; to actually identify variants, we have to use a different tool from the samtools suite called [bcftools](https://samtools.github.io/bcftools/bcftools.html).***
 
-##### Step 2: Detect the single nucleotide polymorphisms (SNPs)
+### Step 2: Detect the single nucleotide polymorphisms (SNPs)
 
 Identify SNPs using bcftools:
 
     bcftools call -vc -O b results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
 
-##### Step 3: Filter and report the SNP variants in VCF (variant calling format)
+### Step 3: Filter and report the SNP variants in VCF (variant calling format)
 
 Filter the SNPs for the final output in VCF format, using vcfutils.pl:
 
