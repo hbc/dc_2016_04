@@ -304,9 +304,9 @@ This command tells *Trimmomatic* to run on a fastq file containing Single-End re
 ```
 So that worked and we have a new fastq file.
 
-   ```bash
-    $ ls SRR097977*
-    SRR097977.fastq  SRR097977.fastq_trim.fastq
+```bash
+$ ls SRR097977*
+SRR097977.fastq  SRR097977.fastq_trim.fastq
 ```
 
 Now we know how to run *Trimmomatic* but there is some good news and bad news.  
