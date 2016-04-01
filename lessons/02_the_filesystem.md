@@ -261,7 +261,7 @@ navigate amongst them.
 
 1. Change directories to your home directory, and list the contents of `dc_sample_data/sra_metadata/` without changing directories again.
 
-2. List the contents of the /bin directory. Do you see anything
+2. List the contents of the ../../bin directory. Do you see anything
 familiar in there? How can you tell these are programs rather than plain files?
 
 ***
