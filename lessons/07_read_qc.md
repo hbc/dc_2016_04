@@ -123,9 +123,9 @@ Your future self will thank you.
     ```
 2. Create three three subdirectories
 
-   ```bash
-    mkdir data docs results
-	```
+    ```bash
+    $ mkdir data docs results
+    ```
 
 3. Move our sample data to our working (home) directory
    
