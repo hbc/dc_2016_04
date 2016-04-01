@@ -541,12 +541,12 @@ just nicely put the files in the Trash, they're really gone!
 **Exercise**
 
 1.  Create a backup directory called `new_backup`
-2.  Copy all 6 fastq files files there with 1 command
+2.  Copy both fastq files files there with 1 command
 
 * * * *
 
 By default, `rm`, will NOT delete directories. You can tell `rm` to
-delete a directory using the `-r` option. Let's delete that `new` directory
+delete a directory using the `-r` option. Let's delete our `backup` and `new_backup` directories
 we just made. Enter the following command:
 
 	$ rm -r new_backup
