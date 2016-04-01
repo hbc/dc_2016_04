@@ -339,14 +339,17 @@ The '*' is expanded to include any file that ends with '.fastq'
 ****
 **Exercise**
 
-Do each of the following using a single `ls` command without
+1. List the contents of the ../../bin directory. Do you see anything
+familiar in there? How can you tell these are programs rather than plain files?
+
+2. Do each of the following using a single `ls` command without
 navigating to a different directory.
 
-1.  List all of the files in `/bin` that start with the letter 'c
-2.  List all of the files in `/bin` that contain the letter 'a'
-3.  List all of the files in `/bin` that end with the letter 'o'
+	1.  List all of the files in `/bin` that start with the letter 'c
+	2.  List all of the files in `/bin` that contain the letter 'a'
+	3.  List all of the files in `/bin` that end with the letter 'o'
 
-BONUS: List all of the files in '/bin' that contain the letter 'a' or 'c'
+	BONUS: List all of the files in '/bin' that contain the letter 'a' or 'c'
 
 ****
 
