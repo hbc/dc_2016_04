@@ -452,7 +452,7 @@ the previous search. `less` searches from the current location and
 works its way forward. If you are at the end of the file and search the word, `less` will not find it. You need to go to the
 beginning of the file and search.
 
-For instance, let's search for the sequence `GTGCGGG` in our file.
+For instance, let's search for the sequence `GTTGATC` in our file.
 You can see that we go right to that sequence and can see
 what it looks like.
 
