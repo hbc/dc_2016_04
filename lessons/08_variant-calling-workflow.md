@@ -11,8 +11,6 @@ Learning Objectives:
 * Automate a workflow by grouping a series of sequential commands into a script
 * Modify and submit the workflow script to the cluster
 
-# Running a Workflow
-
 ## Setting up
 
 To get started with this lesson, we will need to grab some data from an outside
