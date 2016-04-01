@@ -279,13 +279,13 @@ The next two arguments are input file and output file names.  These are then fol
 Change directories to the untrimmed fastq data location:
 
    ```bash
-$ cd /home/dcuser/dc_workshop/data/untrimmed_fastq
+$ cd ~/dc_workshop/data/untrimmed_fastq
 ```
 Since the *Trimmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
 
 For the single fastq file `SRR098283.fastq`, the command is:
 ```
-$ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE \
+$ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE \
 -threads 4 \
 SRR098283.fastq \
 SRR098283.fastq_trim.fastq \
