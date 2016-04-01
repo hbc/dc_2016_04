@@ -20,19 +20,25 @@ When working with NGS data, the raw reads you get off of the sequencer will need
 
 An example of the workflow we will be using for our variant calling analysis is provided below with a brief description of each step. 
 
+![workflow](../img/variant_calling_workflow.png)
+
 
 1. Quality control - Assessing quality using FastQC
 2. Quality control - Trimming and/or filtering reads (if necessary)
 3. Align reads to reference genome 
-4. Count the number of reads mapping to each gene using htseq-count
-5. Statistical analysis (count normalization, linear modeling using R-based tools)
-
-![workflow](../img/rnaseq_workflow.png)
+4. Perform post-alignment clean-up
+5. Variant calling
 
 These workflows in bioinformatics adopt a plug-and-play approach in that the output of one tool can be easily used as input to another tool without any extensive configuration. Having standards for data formats is what makes this feasible. Standards ensure that data is stored in a way that is generally accepted and agreed upon within the community. The tools that are used to analyze data at different stages of the workflow are therefore built under the assumption that the data will be provided in a specific format.  
 
 
-## FASTQ format
+## Quality Control
+
+The first step in the variant calling work flow is to take the FASTQ files received from the sequencing facility and assess the quality of the sequence reads.
+
+![workflow_qc](../img/var_calling_workflow_qc.png)
+
+### FASTQ format
 
 The [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) file format is the defacto file format for sequence reads generated from next-generation sequencing technologies. This file format evolved from FASTA in that it contains sequence data, but also contains quality information. Similar to FASTA, the FASTQ file begins with a header line. The difference is that the FASTQ header is denoted by a `@` character. For a single record (sequence read) there are four lines, each of which are described below:
 
