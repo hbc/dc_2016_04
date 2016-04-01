@@ -232,7 +232,7 @@ earlier that the command:
 
 had the same effect - it took us to the `hidden` directory. But,
 instead of specifying the full path
-(`/home/dcuser/dc_sample_data/data`), we specified a *relative path*. In
+(`/home/dcuser/dc_sample_data/untrimmed_fastq`), we specified a *relative path*. In
 other words, we specified the path **relative to our current
 directory**. 
 
@@ -275,7 +275,7 @@ directory:
 
 	$ cd
 	
-    $ cd dc_sample_data/sra_metadata/
+	$ cd dc_sample_data/sra_metadata/
 
 Then enter the command:
 
@@ -316,10 +316,9 @@ directory. Now try this command:
 
 This lists every file that ends with a `fastq`. This command:
 	
-	$ cd
-	$ ls ../../bin/ls*
+	$ ls SRR*
 
-Lists every file in `../../bin` that ends in the characters `.sh`.
+Lists every file in that starts with the characters `SRR`.
 
     $ ls *977.fastq
 
