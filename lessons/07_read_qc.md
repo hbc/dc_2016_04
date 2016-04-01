@@ -287,16 +287,16 @@ For the single fastq file `SRR098283.fastq`, the command is:
 ```
 $ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE \
 -threads 4 \
-SRR098283.fastq \
-SRR098283.fastq_trim.fastq \
+SRR097977.fastq \
+SRR097977.fastq_trim.fastq \
 SLIDINGWINDOW:4:20 \
 MINLEN:20
 ```
 The backslashes at the end of the lines allow us to continue our script on new lines, which helps with readability of some long commands.
 
-This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (``SRR098283.fastq``, in this case) and to name the output file ``SRR098283.fastq_trim.fastq``. The program will remove nucleotides using a sliding window of size 4 that will remove those bases if their average quality score is below 20. The entire read will be discarded if the length of the read after trimming drops below 20 nucleotides.
+This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (``SRR097977.fastq``, in this case) and to name the output file ``SRR097977.fastq_trim.fastq``. The program will remove nucleotides using a sliding window of size 4 that will remove those bases if their average quality score is below 20. The entire read will be discarded if the length of the read after trimming drops below 20 nucleotides.
 
-    TrimmomaticSE: Started with arguments: SRR098283.fastq 	SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+    TrimmomaticSE: Started with arguments: SRR097977.fastq 	SRR097977.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
     Automatically using 4 threads
     Quality encoding detected as phred33
     Input Reads: 21564058 Surviving: 17030985 (78.98%) Dropped: 4533073 (21.02%)
@@ -305,8 +305,8 @@ This command tells *Trimmomatic* to run on a fastq file containing Single-End re
 So that worked and we have a new fastq file.
 
    ```bash
-    $ ls SRR098283*
-    SRR098283.fastq  SRR098283.fastq_trim.fastq
+    $ ls SRR097977*
+    SRR097977.fastq  SRR097977.fastq_trim.fastq
 ```
 
 Now we know how to run *Trimmomatic* but there is some good news and bad news.  
