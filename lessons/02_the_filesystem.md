@@ -315,10 +315,11 @@ directory. Now try this command:
 	$ ls *fastq
 
 This lists every file that ends with a `fastq`. This command:
+	
+	$ cd
+	$ ls ../../bin/ls*
 
-    $ ls /usr/bin/*.sh
-
-Lists every file in `/usr/bin` that ends in the characters `.sh`.
+Lists every file in `../../bin` that ends in the characters `.sh`.
 
     $ ls *977.fastq
 
