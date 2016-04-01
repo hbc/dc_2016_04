@@ -127,10 +127,8 @@ Your future self will thank you.
     $ mkdir data docs results
     ```
 
-3. We will need to grab some data from an outside
+3. Copy data from an outside
 server using `wget` on the command line.
-
-	Make sure you are in the dc_workshop directory first
 
 	```bash
 	$ cd ~/dc_workshop
