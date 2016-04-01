@@ -116,9 +116,14 @@ learn to become proficient with the pipe and redirection operators:
 
 Finally, let's use the new tools in our kit and a few new ones to example our SRA metadata file.
 
-    cd 
-    cd dc_sample_data/
+     $ cd 
+     $ cd dc_sample_data/sra_metadata/
+     $ ls
 
+Take a look at the metadata file, `SraRunTable.txt`:
+
+     $ less SraRunTable.txt
+     
 Let's ask a few questions about the data
 
 1) How many of the read libraries are paired end?
@@ -129,7 +134,7 @@ First, what are the column headers?
     BioSample_s	InsertSize_l	LibraryLayout_s	Library_Name_s	LoadDate_s	MBases_l	MBytes_l	ReleaseDate_s Run_s SRA_Sample_s Sample_Name_s Assay_Type_s AssemblyName_s BioProject_s Center_Name_s Consent_s Organism_Platform_s SRA_Study_s g1k_analysis_group_s g1k_pop_code_s source_s strain_s
 
 That's only the first line but it is a lot to take in.  'cut' is a program that will extract columns in tab-delimited
-files.  It is a very good command to know.  Lets look at just the first four columns in the header using the '|' readirect
+files.  It is a very good command to know.  Lets look at just the first four columns in the header using the '|' redirect
 and 'cut'
 
     head -n 1 SraRunTable.txt | cut -f1-4
