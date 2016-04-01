@@ -147,19 +147,19 @@ this archive using the command below.
 	This will create a directory tree that contains some input data (reference genome and fastq files)
 and a shell script that details the series of commands used to run the variant calling workflow.
 
-<pre>
-variant_calling
-├── ref_genome
-│   └── ecoli_rel606.fasta
-├── run_variant_calling.sh
-└── trimmed_fastq
-    ├── SRR097977.fastq
-    ├── SRR098026.fastq
-    ├── SRR098027.fastq
-    ├── SRR098028.fastq
-    ├── SRR098281.fastq
-    └── SRR098283.fastq
-</pre>
+	<pre>
+	variant_calling
+	├── ref_genome
+	│   └── ecoli_rel606.fasta
+	├── run_variant_calling.sh
+	└── trimmed_fastq
+	    ├── SRR097977.fastq
+	    ├── SRR098026.fastq
+	    ├── SRR098027.fastq
+	    ├── SRR098028.fastq
+	    ├── SRR098281.fastq
+	    └── SRR098283.fastq
+	</pre>
 
 
 
