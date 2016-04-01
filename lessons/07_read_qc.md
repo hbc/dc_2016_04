@@ -377,29 +377,6 @@ for infile in *.fastq; do
 done
 
 mv *trim.fastq ../trimmed_fastq/
-
-cd ../trimmed_fastq/
-
-echo "Running fastqc on untrimmed fastq files..."
-~/FastQC/fastqc *.fastq
-
-mkdir -p ~/dc_workshop/results/fastqc_trimmed_reads
-
-echo "saving trimmed results..."
-mv *.zip ~/dc_workshop/results/fastqc_trimmed_reads/
-mv *.html ~/dc_workshop/results/fastqc_trimmed_reads/
-```
-
-****
-**Exercise**
-
-1) Use nano to create a shell script using with the code above (you can copy/paste),
-named read_qc.sh
-
-2) Run the script
-
-3) Bonus points: Use something you learned yesterday to save the output
-of the script to a file while it is running.
 ----
 
 *This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*
