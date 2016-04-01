@@ -401,7 +401,8 @@ contents of directories, but how do we look at the contents of files?
 
 The easiest way (but really not the ideal way in most situations) to examine a file is to just print out all of the
 contents using the command `cat`. Enter the following command:
-
+	
+	$ cd ~/dc_sample_data/untrimmed_fastq/
 	$ cat SRR098026.fastq
 
 This prints out the all the contents of the the `SRR098026.fastq` to the screen.
