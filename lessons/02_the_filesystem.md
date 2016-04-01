@@ -103,7 +103,7 @@ you are on one of the branches of that tree, your home directory (/home/dcuser)
 
 Now let's go do that same navigation at the command line.
 
-Type
+Type:
 
 	$ cd
 
@@ -120,7 +120,7 @@ If you want to know what directory you're currently in, type
 
 This stands for 'print working directory'. The directory you're currently working in.
 
-What if we want to move back up and out of the 'data' directory? Can we just
+What if we want to move back up and out of the 'untrimmed_fastq' directory? Can we just
 type `cd dc_sample_data`? Try it and see what happens.
 
 To go 'back up a level' we need to use `..`
