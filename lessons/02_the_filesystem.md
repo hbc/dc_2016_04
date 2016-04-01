@@ -75,8 +75,7 @@ Commands that are run from the shell can get extremely complicated. To see an ex
 ## The Unix directory file structure (a.k.a. where am I?)
 
 As you've already just seen, you can move around in different directories
-or folders at the command line. Why would you want to do this, rather
-than just navigating around the normal way using a GUI (GUI = Graphical User Interface, pronounced *gooey*).
+or folders at the command line. You are probably accustomed to navigating around the normal way using a GUI (GUI = Graphical User Interface, pronounced *gooey*), but you will find that it's not too difficult once you get the hang of it.
 
 #### Moving around the file system
 
