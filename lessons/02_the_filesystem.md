@@ -305,7 +305,7 @@ To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.
 
 #### Wild cards
 
-Navigate to the `~/dc_sample_data/data/untrimmed_fastq` directory. This
+Navigate to the `~/dc_sample_data/untrimmed_fastq` directory. This
 directory contains FASTQ files from our RNA-Seq experiment. 
 
 The `*` character is a shortcut for "everything". Thus, if
