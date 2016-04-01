@@ -34,7 +34,40 @@ These workflows in bioinformatics adopt a plug-and-play approach in that the out
 
 ## Quality Control
 
-The first step in the variant calling work flow is to take the FASTQ files received from the sequencing facility and assess the quality of the sequence reads.
+The first step in the variant calling work flow is to take the FASTQ files received from the sequencing facility and assess the quality of the sequence reads. We will need to grab some data from an outside
+server using `wget` on the command line.
+
+Make sure you are in the dc_workshop directory first
+
+```bash
+$ cd ~/dc_workshop
+$ wget http://reactomerelease.oicr.on.ca/download/archive/variant_calling.tar.gz
+```
+
+The file 'variant_calling.tar.gz' is what is commonly called a "tarball", which is
+a compressed archive similar to the .zip files we have seen before.  We can decompress
+this archive using the command below.
+
+```bash
+$ tar -zxvf variant_calling.tar.gz
+```
+This will create a directory tree that contains some input data (reference genome and fastq files)
+and a shell script that details the series of commands used to run the variant calling workflow.
+
+<pre>
+variant_calling
+├── ref_genome
+│   └── ecoli_rel606.fasta
+├── run_variant_calling.sh
+└── trimmed_fastq
+    ├── SRR097977.fastq
+    ├── SRR098026.fastq
+    ├── SRR098027.fastq
+    ├── SRR098028.fastq
+    ├── SRR098281.fastq
+    └── SRR098283.fastq
+</pre>
+
 
 ![workflow_qc](../img/var_calling_workflow_qc.png)
 
