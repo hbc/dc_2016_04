@@ -366,6 +366,9 @@ echo "saving..."
 cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 
 echo "Running Trimmomatic..."
+
+cd ~/dc_workshop/data/untrimmed_fastq/
+
 for infile in *.fastq; do
 
   # Create names for the output trimmed files
