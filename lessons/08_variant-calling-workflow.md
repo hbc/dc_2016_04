@@ -37,16 +37,17 @@ and a shell script that details the series of commands used to run the variant c
 
 <pre>
 variant_calling
-├── ref_genome
-│   └── ecoli_rel606.fasta
-├── run_variant_calling.sh
-└── trimmed_fastq
-    ├── SRR097977.fastq
-    ├── SRR098026.fastq
-    ├── SRR098027.fastq
-    ├── SRR098028.fastq
-    ├── SRR098281.fastq
-    └── SRR098283.fastq
+├── data
+    ├── ref_genome
+        └── ecoli_rel606.fasta
+    └── trimmed_fastq
+        ├── SRR097977.fastq
+        ├── SRR098026.fastq
+        ├── SRR098027.fastq
+        ├── SRR098028.fastq
+        ├── SRR098281.fastq
+        └── SRR098283.fastq
+└── run_variant_calling.sh
 </pre>
 
 Without getting into the details yet, the variant calling workflow will do the following steps
