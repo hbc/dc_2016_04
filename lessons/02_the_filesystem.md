@@ -84,7 +84,7 @@ Let's practice moving around a bit.
 We're going to work in that `dc_sample_data` directory.
 
 First we did something like go to the folder of our username. Then we opened
-`dc_sample_data` then `data`
+`dc_sample_data` then `untrimmed_fastq`
 
 Let's draw out how that went.
 
