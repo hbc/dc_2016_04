@@ -28,9 +28,9 @@ We are going to take the commands we repeat frequently and save them into a file
 1. Tell us what is our current working directory
 2. Lists the contents of the directory 
 
-First let's move into the `unix_lesson` directory and open a new file using `nano`:
+First let's move into the `~/dc_sample_data` directory and create a new file using `nano`:
 
-	$ cd ~/ngs_course/unix_lesson
+	$ cd ~/dc_sample_data
 	$ nano listing.sh
 	
 Type in the following lines in the `listing.sh` file:
@@ -50,7 +50,7 @@ Save the file and exit `nano`. Now let's run the new script we have created. To 
 > 
 > Were the `echo` commands helpful in letting you know what came next?
 
-This is a very simple shell script. In this session and in upcoming sessions, we will be learning how to write more complex ones. You will see how the power of scripts can make our lives much easier.
+This is a very simple shell script. In this lesson and in upcoming lessons, we will be learning how to write more complex ones. You will see how the power of scripts can make our lives much easier.
 
 ## Bash variables
 
