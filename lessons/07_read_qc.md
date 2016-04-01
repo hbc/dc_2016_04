@@ -131,7 +131,6 @@ Your future self will thank you.
 server using `wget` on the command line.
 
 	```bash
-	$ cd ~/dc_workshop
 	$ wget http://reactomerelease.oicr.on.ca/download/archive/variant_calling.tar.gz
 	```
 
