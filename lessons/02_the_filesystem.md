@@ -91,7 +91,7 @@ Let's draw out how that went.
 Now let's draw some of the other files and folders we could have clicked on.
 
 This is called a hierarchical file system structure, like an upside down tree
-with root (/) at the base that looks like this.
+with root (/) at the base that looks like this:
 
 
 ![Unix](../img/Slide1.jpg)
