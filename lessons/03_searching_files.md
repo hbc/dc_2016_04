@@ -1,17 +1,12 @@
 --
 layout: page
-title: "The Shell"
+title: "Introduction to the Shell"
+authors: "Sheldon McKay, Paul Wilson, Milad Fatenejad, Sasha Wood and Radhika Khetani"
 comments: true
 date: 2015-07-30
 ---
 
-# The Shell
-
-Author: Sheldon McKay
-
-Adapted from the lesson by Tracy Teal.
-Original contributors:
-Paul Wilson, Milad Fatenejad, Sasha Wood and Radhika Khetani for Software Carpentry (http://software-carpentry.org/)
+## Learning objectives
 
 ## Searching files
 
