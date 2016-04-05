@@ -1,11 +1,15 @@
 ---
 layout: page
-title: "The Shell"
+title: "Introduction to the Shell"
 comments: true
 date: 2014-07-30
 ---
 
-# The Shell
+## Learning objectives
+* Getting around the Unix file system
+*
+
+
 
 ## Starting with the shell
 
@@ -31,7 +35,7 @@ There are two items listed.  What are they? We can use a command line "modifier"
 	$ ls -F
       
 	sra_metadata/  untrimmed_fastq/
-
+	
 Anything with a "/" after it is a directory. Things with a "*" after them are programs. If there are no decorations after the name, it's a file.
 
 You can also use the command `ls -l` to see whether items in a directory are files or directories. 
@@ -54,7 +58,7 @@ Let's go into the `untrimmed_fastq` directory and see what is in there.
 There are two items in this directory with no trailing slashes, so they are files.
 
 
-#### Arguments
+### Arguments
 
 Most programs take additional arguments that control their exact
 behavior. For example, `-F` and `-l` are arguments to `ls`.  The `ls`
@@ -77,7 +81,7 @@ Commands that are run from the shell can get extremely complicated. To see an ex
 As you've already just seen, you can move around in different directories
 or folders at the command line. You are probably accustomed to navigating around the normal way using a GUI (GUI = Graphical User Interface, pronounced *gooey*), but you will find that it's not too difficult once you get the hang of it.
 
-#### Moving around the file system
+### Moving around the file system
 
 Let's practice moving around a bit.
 
@@ -143,7 +147,7 @@ Hint: hidden files and folders in unix start with '.', for example .my_hidden_di
 * * * 
 
 
-#### Examining the contents of other directories
+### Examining the contents of other directories
 
 By default, the `ls` commands lists the contents of the working
 directory (i.e. the directory you are in). You can always find the
@@ -180,7 +184,7 @@ the intermediate directory.
 List the 'SRR097977.fastq' file from your home directory without changing directories
 ****
 
-##### Shortcut: Tab Completion
+### Shortcut: Tab Completion
 
 Navigate to the home directory. 
 
@@ -263,9 +267,9 @@ Change directories to your home directory, and list the contents of `dc_sample_d
 
 ***
 
-## Saving time with shortcuts, wild cards, and tab completion
+## Saving time with other shortcuts
 
-#### Shortcuts
+### Shortcuts
 
 There are several shortcuts which you should know about, but today we are going to talk about only a few. As you continue to work with the shell and on the terminal a lot more, you will come across and hopefully adapt many other shortcuts. 
 
@@ -303,7 +307,7 @@ same thing, they print the contents of the current directory. This may seem like
 To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.`, and `ls /home/dcuser` all do exactly the same thing. These shortcuts are not necessary, but they are really convenient!
 
 
-#### Wild cards
+### Wild cards
 
 Navigate to the `~/dc_sample_data/untrimmed_fastq` directory. This
 directory contains FASTQ files from our RNA-Seq experiment. 
@@ -354,7 +358,7 @@ navigating to a different directory.
 ****
 
 
-#### Command History
+## Command History
 
 You can easily access previous commands.  Hit the up arrow.
 Hit it again.  You can step backwards through your command history.
@@ -412,7 +416,7 @@ This prints out the all the contents of the the `SRR098026.fastq` to the screen.
 What does this file contain?
 
 
-* * * *
+****
 **Exercises**
 
 1.  Print out the contents of the `~/dc_sample_data/untrimmed_fastq/SRR097977.fastq`
@@ -422,7 +426,7 @@ What does this file contain?
     use one short command to print the contents of all of the files in
     the `/home/dcuser/dc_sample_data/untrimmed_fastq` directory.
 
-* * * *
+***
 
 `cat` is a terrific command, but when the file is really big, it should be avoided; `less`, is preferred for files larger than a few bytes. Let's take a look at the fastq files in `untrimmed_fastq`. These files are quite large, so we probably do not want to use the `cat` command to look at them. Instead, we can use the `less` command. 
 
@@ -537,13 +541,13 @@ just nicely put the files in the Trash, they're really gone!
 >
 > Same with moving and renaming files. It will **not** ask you if you are sure that you want to "replace existing file".
 
-* * * *
+***
 **Exercise**
 
 1.  Create a backup directory called `new_backup`
 2.  Copy both fastq files files there with 1 command
 
-* * * *
+***
 
 By default, `rm`, will NOT delete directories. You can tell `rm` to
 delete a directory using the `-r` option. Let's delete our `backup` and `new_backup` directories
@@ -589,16 +593,4 @@ We're going to come back and use this file in just a bit.
 ***
 
 
-### Learning resources on the shell
-
-Shell cheat sheets:<br>
-
-* [http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/](http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/)
-* [https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md](https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md)
-
-Explain shell - a web site where you can see what the different components of
-a shell command are doing.  
-
-* [http://explainshell.com](http://explainshell.com)
-* [http://www.commandlinefu.com](http://www.commandlinefu.com)
 
