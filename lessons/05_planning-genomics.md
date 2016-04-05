@@ -9,7 +9,6 @@ minutes: 20
 * Make decisions about how (if) data will be stored, archived, shared, etc. 
 * Anticipate strategies we will need to learn in the rest of the lesson set. 
 
-## Lesson 
 
 There are a variety ways to approach working with a large sequencing dataset. You may be a novice who has not used bioinformatics tools beyond doing BLAST searches. You may have bioinformatics experience with other types of data and are working with high-throughput (NGS) sequence data for the first time. Either way, these lessons for you! In the most important ways, the methods and approaches we need in bioinformatics are the same ones we need at the bench or in the field - *planning, documenting, and organizing* will be the key to good reproducible science. 
 
@@ -35,7 +34,7 @@ Before we go any further here are some important questions to consider. If you a
 
 The first step in sending your sample for sequencing will be to complete a form documenting the metadata for the facility. Take a look at the following submission spreadsheet. 
 
-[Sample submission sheet](./sample_submission.txt)*<br>
+[Sample submission sheet](../data/sample_submission.txt)*<br>
 > *Download the file using right-click (PC)/command-click (Mac). This is a tab-delimited text file; try opening it with Excel or another spreadsheet program. 
 
 **Questions**
@@ -48,10 +47,10 @@ The first step in sending your sample for sequencing will be to complete a form 
 
 **B. Retrieving samples from the facility**
 
-When the data come back from the facility, you will receive some documentation (metadata) as well as the sequence files themselves. Download and examine the following file - here provided both as an excel and a text file:
+When the data come back from the facility, you will receive some documentation (metadata) as well as the sequence files themselves. Download and examine the following file - here provided as a text file and excel file:
 
-- [Sequencing results - excel](./sequencing_results_metadata.xlsx)
-- [Sequencing results - text](./sequencing_results_metadata.txt)
+- [Sequencing results - text](../data/sequencing_results_metadata.txt)
+- [Sequencing results - Excel](../data/sequencing_results_metadata.xls)
 
 **Questions**
 
@@ -61,13 +60,13 @@ When the data come back from the facility, you will receive some documentation (
 4. What does the '.gz' extension on the filenames indicate?
 5. What is the total file size - what challenges in downloading and sharing these data might exist?
 
-#### Summary 
+## Summary 
 
 Before analysis of data has begun, there are already many potential areas for errors and omissions. Keeping organized and keeping a critical eye can help catch mistakes. 
 
 One of Data Carpentry's goals is to help you achieve *competency* in working with bioinformatics. This means that you can accomplish routine tasks, under normal conditions, in an acceptable amount of time. While an expert might be able to get to a solution on instinct alone - taking your time, using Google, and asking for help are all valid ways of solving your problems. As you complete the lessons you'll be able to use all of those methods more efficiently.
 
-#### Where to go from here
+## Where to go from here
 
 What are the minimum metadata standards for your experiment/datatype - 
 
