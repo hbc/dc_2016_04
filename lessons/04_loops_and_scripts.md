@@ -4,17 +4,15 @@ author: "Bob Freeman, Mary Piper, Radhika Khetani, Meeta Mistry"
 date: "Wednesday, October 28, 2015"
 ---
 
-Approximate time: 60 minutes
 
 ## Learning Objectives
 
-* Learn how to operate on multiple files 
-* Capture previous commands into a script to re-run later
-* Abstract your script for flexibility
-* Write a series of scripts, that are increasingly more flexible, to automate your workflow
+* Capture previous commands into a script to re-run in one single command
+* Understanding variables and storing information
+* Learn how to use variables to operate on multiple files
 
-Now that you've been using quite a number of commands to interrogate your data, 
-wouldn't it be great if you could do this for each set of data that comes in, without having to manually re-type the commands?
+
+Now that you've been introduced to a number of commands to interrogate your data, wouldn't it be great if you could do this for each set of data that comes in, without having to manually re-type the commands?
 
 Welcome to the beauty and purpose of shell scripts.
 
@@ -99,7 +97,7 @@ What just happened? Because our variable contains multiple values, the shell run
 
 ## Loops
 
-Another powerful concept in the Unix shell is the concept of "Loops". We have just shown you that you can run a single command on multiple files by creating a variable whose values are the filenames that you wish to work on. But what if you want to **run a sequence of multiple commands, on multiple files**? This is where loop come in handy!
+Another powerful concept in the Unix shell and useful when writing scripts is the concept of "Loops". We have just shown you that you can run a single command on multiple files by creating a variable whose values are the filenames that you wish to work on. But what if you want to **run a sequence of multiple commands, on multiple files**? This is where loop come in handy!
 
 Looping is a concept shared by several programming languages, and its implementation in bash is very similar to other languages. 
 
@@ -251,7 +249,7 @@ cat bad-reads.count.summary >> ../runlog.txt
 To run this script, we simply enter the following command:
 
 ```bash
-$ bash generate_bad_reads_summary.sh
+$ sh generate_bad_reads_summary.sh
 ```
 
 To keep your data organized, let's move all of the bad read files out of our `untrimmed_fastq` directory into a new directory called `other`.
