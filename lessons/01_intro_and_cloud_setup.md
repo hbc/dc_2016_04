@@ -167,7 +167,6 @@ For Windows, you will have access to the shell using PuTTy
 ### Resources on the shell
 * http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/ 
 * https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md
-
 * [Explain shell](http://explainshell.com )- a web site where you can see what the different components of a shell command are doing.
 * http://www.commandlinefu.com
 
