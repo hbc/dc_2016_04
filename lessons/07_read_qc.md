@@ -145,7 +145,15 @@ To run the fastqc program, we call it from its location in `~/FastQC`.  *FastQC*
     ```bash
     $ ~/FastQC/fastqc *.fastq
     ```
-Now, let's create a home for our results
+
+Take a quick look at what files were generated:
+
+    ```bash
+    $ ls -l 
+    ```
+
+You should see a `.zip` and `.html` file that was created for each FASTQ file. Now, let's create a home for our results:
+
     ```bash
     $ mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
     ```
@@ -183,11 +191,11 @@ Within the 'Site Manager' window, do the following:
 6. Password: data4Carp
 7. Click 'Connect'
 	
-![FileZilla_step2](../img/Filezilla_step2.png)
+![FileZilla_step2](../img/FileZilla_step2.png)
 
 ######Filezilla - Step 3
 
-In FileZilla, on the left side of the screen navigate to the location you would like to save the file, and on the right side of the screen navigate through your remote directory to an .html file. Double click on the .html file to transfer a copy.)
+In FileZilla, on the left side of the screen navigate to the location you would like to save the file, and on the right side of the screen navigate through your remote directory to the file `/home/dcuser/dc_workshop/results/fastqc_untrimmed_reads/SRR097977_fastqc.html`. Double click on the .html file to transfer a copy, or click and drag over to the right hand panel.
 
 Open the .html file to view the report.
 
@@ -256,7 +264,7 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 ### How to clean reads using *Trimmomatic*
 #### A detailed explanation of features
 
-Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads. To accomplish this task we will use *Trimmomatic* [http://www.usadellab.org/cms/?page=trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
+Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads. To accomplish this task we will use [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
 
 *Trimmomatic* is a java based program that can remove sequencer specific reads and nucleotides that fall below a certain threshold. *Trimmomatic* can be multithreaded to run quickly. 
 
@@ -297,7 +305,7 @@ $ cd ~/dc_workshop/data/untrimmed_fastq
 ```
 Since the *Trimmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
 
-For the single fastq file `SRR098283.fastq`, the command is:
+For the single fastq file `SRR097977.fastq`, the command is:
 
 ```
 $ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE \
@@ -307,7 +315,7 @@ SRR097977.fastq_trim.fastq \
 SLIDINGWINDOW:4:20 \
 MINLEN:20
 ```
-The backslashes at the end of the lines allow us to continue our script on new lines, which helps with readability of some long commands.
+*The backslashes at the end of the lines allow us to continue our script on new lines, which helps with readability of some long commands.*
 
 This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (``SRR097977.fastq``, in this case) and to name the output file ``SRR097977.fastq_trim.fastq``. The program will remove nucleotides using a sliding window of size 4 that will remove those bases if their average quality score is below 20. The entire read will be discarded if the length of the read after trimming drops below 20 nucleotides.
 
@@ -331,15 +339,19 @@ One should always ask for the bad news first.  Trimmomatic only operates on
 one input file at a time and we have more than one input file.  The good news?
 We already know how to use a 'for loop' to deal with this situation.
 
+Before we run our for loop, let's remove the file that we just created:
+
+	rm *trim.fastq
+
 ```bash
 $ for infile in *.fastq
->do
->outfile=$infile\_trim.fastq
->java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
->done
+do
+outfile=${infile}_trim.fastq
+java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+done
 ```
 
-Do you remember how the first specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called 'infile'.  Note that the third line of this for loop is creating a second variable called 'outfile'.  We assign it the value of $infile with '_trim.fastq' appended to it.  The '\' escape character is used so the shell knows that whatever follows \ is not part of the variable name $infile.  There are no spaces before or after the '='.
+Do you remember how the first specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called 'infile'.  Note that the third line of this for loop is creating a second variable called 'outfile'.  We assign it the value of $infile with '_trim.fastq' appended to it.  The variable is wrapped in curly brackets '{}' so the shell knows that whatever follows is not part of the variable name $infile.  There are no spaces before or after the '='.
 
 Now let's keep our directory organized. Make a directory for the trimmed fastq files: 
 
