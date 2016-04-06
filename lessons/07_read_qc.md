@@ -216,10 +216,12 @@ We can save time by using the simple shell `for loop` to iterate through the lis
 After you type the first line, you will get a special '>' prompt to type next next lines.  
 You start with 'do', then enter your commands, then end with 'done' to execute the loop.
 
-    $ for zip in *.zip
-    > do
-    > unzip $zip
-    > done
+```bash
+$ for zip in *.zip
+> do
+> unzip $zip
+> done
+```
 
 Note that in the first line, we create a variable named `zip`.  After that, we call that variable with the syntax `$zip`. `$zip` is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
 
@@ -321,10 +323,10 @@ We already know how to use a 'for loop' to deal with this situation.
 
 ```bash
 $ for infile in *.fastq
-    >do
-    >outfile=$infile\_trim.fastq
-    >java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
-    >done
+>do
+>outfile=$infile\_trim.fastq
+>java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+>done
 ```
 
 Do you remember how the first specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called 'infile'.  Note that the third line of this for loop is creating a second variable called 'outfile'.  We assign it the value of $infile with '_trim.fastq' appended to it.  The '\' escape character is used so the shell knows that whatever follows \ is not part of the variable name $infile.  There are no spaces before or after the '='.
