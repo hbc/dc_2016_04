@@ -8,6 +8,10 @@ date: 2015-07-30
 
 ## Learning objectives
 
+* Practice searching for characters or patterns in a text file using the `grep` command
+* Learn about output redirection
+* Explore how to use the pipe (`|`) character to chain together commands
+
 ## Searching files
 
 We showed a little how to search within a file using `less`. We can also

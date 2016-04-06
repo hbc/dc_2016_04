@@ -8,10 +8,12 @@ Approximate time: 120 minutes
 
 ## Learning Objectives:
 
-* Introducing bioinformatics workflows and data standards
-* Learning about the FASTQ format
-* Understanding quality scores
-* Examining error profiles for QC analysis
+* Understand the bioinformatics workflows and data standards
+* Learn about the FASTQ format
+* Understand nucleotide quality scores
+* Examine error profiles for QC analysis
+* Improve quality of data by removing low quality nucleotides
+* Automate the QC steps using shell scripts
 
 
 ## Bioinformatics workflows
@@ -284,6 +286,7 @@ $ cd ~/dc_workshop/data/untrimmed_fastq
 Since the *Trimmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
 
 For the single fastq file `SRR098283.fastq`, the command is:
+
 ```
 $ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE \
 -threads 4 \
@@ -381,5 +384,3 @@ done
 
 mv *trim.fastq ../trimmed_fastq/
 ----
-
-*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*

@@ -6,9 +6,10 @@ date: 2014-07-30
 ---
 
 ## Learning objectives
-* Getting around the Unix file system
-*
 
+* Navigate around the Unix file system
+* Explore the content of files
+* Learn how to manipulate files
 
 
 ## Starting with the shell
