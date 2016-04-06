@@ -158,6 +158,8 @@ Sort the BAM file:
 
 ## Variant calling
 
+A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome or transcriptome. The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are number of tools available for variant calling. In this workshop we will be using `bcftools`
+
 ![workflow](../img/variant_calling_workflow.png)
 
 ### Step 1: Calculate the read coverage of positions in the genome
