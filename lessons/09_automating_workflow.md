@@ -1,4 +1,3 @@
-
 ---
 title: "Automating the workflow"
 author: "Mary Piper, Meeta Mistry"
@@ -12,22 +11,24 @@ Approximate time: 75 minutes
 * Automate a workflow by grouping a series of sequential commands into a script
 * Modify the script to grant it more flexibility 
 
-#### Exercise I - Calling Variants from all files?
+## Calling Variants from all files?
 
-That's a lot of work, yes? But you have five more FASTQ files to go...
+That was a lot of work, yes? But you have five more FASTQ files to go...
 
 - Remembering what commands *and* what parameters to type can be pretty daunting. What can
 you do to help yourself out in this regard?
 - If you were to automate this process, what additional bits of information might you need?
 
 
-#### Exercise II - Automating this Workflow with a Bash Script
+## Automating this Workflow with a Bash Script
 
 The easiest way for you to be able to repeat this process is to capture the steps that
 you've performed in a bash script. And you've already learned how to do this in previous
 lessons. So...
 
-1. Using your command history, create a script file that will repeat these commands
+
+### Collect all required commands
+Using your command history, create a script file that will repeat these commands
 for you. Name your script *run_variant_call_on_file.sh*. 
 
 ```bash
@@ -62,7 +63,8 @@ bcftools view results/bcf/SRR098283_variants.bcf | /usr/share/samtools/vcfutils.
 
 ```
 
-2. At the moment this script will only call variants for `SRR098283.fastq`, but we want to grant it more flexibility so that it can be run on any FASTQ file that we give it as input.
+### Positional parameters (input files)
+At the moment this script will only call variants for `SRR098283.fastq`, but we want to grant it more flexibility so that it can be run on any FASTQ file that we give it as input.
 
 We can specify a filename as input using **positional parameters**. Positional parameters allow flexibility within a script.
 
@@ -74,6 +76,7 @@ At the start of the script let's create a variable that captures an input parame
 	fq=$1
 
 
+### Naming files (ouput files)
 But, wait! What about the ouput files? They are all named using the SRA ID from the original FASTQ file. We can use a unix command to extract the base name of the file (without the path and .fastq extension) and ue this for naming all of the output files. We'll assign it to the `$base` variable:
 
 	# Grab base of filename for future naming
@@ -86,7 +89,8 @@ Now, wherever we see an output file that contains `SRR098283` we can substitute 
 	bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/$fq >  results/sai/$base.aligned.sai
 
 
-3. We can go a step further in flexibility. Since we've already created our output directories, we can now specify all of the paths for our output files in their proper locations. We will assign various **filenames and location to variables** both for convenience but also to make it easier to see what  is going on in the command below.
+### Assigning ouput file locations to variables
+We can go a step further in flexibility. Since we've already created our output directories, we can now specify all of the paths for our output files in their proper locations. We will assign various **filenames and location to variables** both for convenience but also to make it easier to see what  is going on in the command below.
 
 ```bash
 
@@ -101,23 +105,28 @@ final_variants=results/vcf/$base_final_variants.vcf
 
 ```
 
-4.  We can also add a **shortcut** to store the location to the **genome reference** FASTA file. Now for commands that use the genome (i.e bwa and samtools) we can run them using the genome variable (`$genome`) so these values are not static and hard-coded.
+
+### Genome reference variable
+We can also add a **shortcut** to store the location to the **genome reference** FASTA file. Now for commands that use the genome (i.e bwa and samtools) we can run them using the genome variable (`$genome`) so these values are not static and hard-coded.
 
      # location to genome reference FASTA file
      genome=data/ref_genome/ecoli_rel606.fasta
 
 
 
-5. Finally, when you are writing a multi-step workflow that accepts command-line options (positional parameters), it is very important to **have the usage right in the beginning of the script**. In addition to the usage, it is a good practice to comment about the inputs, steps/tools and output briefly. It is easier to fill both of these in after your script is ready and you have done a test run. So even though this is at the top of the script, it may be the last few lines you add to the script.
+### Usage and commenting
+Finally, when you are writing a multi-step workflow that accepts command-line options (positional parameters), it is very important to **have the usage right in the beginning of the script**. In addition to the usage, it is a good practice to comment about the inputs, steps/tools and output briefly. It is easier to fill both of these in after your script is ready and you have done a test run. So even though this is at the top of the script, it may be the last few lines you add to the script.
 
 Now, walking thru the code, we can make some substitutions as described above. We will also add a command at the beginning of the script to change directories into `~/dc_workshop` so that this script can be run from any location.
 
+
+### Final script
 
 ```bash
 
 #!/bin/bash
 
-# USAGE: sh run_variant_calling_on_file.sh <fastq file> 
+# USAGE: sh run_variant_call_on_file.sh <fastq file> 
 # This script will take the location and name of a fastq file and perform the following steps on it in a new directory. 
     ## starting with alignment using bwa-backtrack
     ## convert the .sai to SAM -> BAM -> sorted BAM, 
