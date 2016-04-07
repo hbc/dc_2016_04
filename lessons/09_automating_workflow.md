@@ -16,8 +16,6 @@ Approximate time: 75 minutes
 
 That's a lot of work, yes? But you have five more FASTQ files to go...
 
-- Try running this workflow on a different FASTQ file. What did you have to do differently
-in order to get this workflow to work?
 - Remembering what commands *and* what parameters to type can be pretty daunting. What can
 you do to help yourself out in this regard?
 - If you were to automate this process, what additional bits of information might you need?
@@ -29,160 +27,156 @@ The easiest way for you to be able to repeat this process is to capture the step
 you've performed in a bash script. And you've already learned how to do this in previous
 lessons. So...
 
-- Using your command history, create a script file that will repeat these commands
-for you. Name your script *run_variant_call_on_file.sh*. Delete your results 
-directories, and run your script. Do you get all the proper output files?
+1. Using your command history, create a script file that will repeat these commands
+for you. Name your script *run_variant_call_on_file.sh*. 
 
-One additional command we can put in the top of the script to allow you to see what
-is going on is the `set -x` bash command. This debugging tool will print out every
-step before it is executed.
+```bash
 
-- Insert the debugging command in your script and re-run it. How is the output different?
-If you're comfortable with how this looks and runs, then comment out this line.
+#! /bin/bash
 
-- In order run this workflow on another file, you'll need to make changes. Copy this file,
-giving the file a similar name, and make appropriate changes to run on another input
-FASTQ file. What did you have to do differently in order to get this workflow to work?
+### Alignmemt
 
-- Knowing techniques that you've learned in previous lessons, what can we do to make this
-workflow more friendly to different sets of input files?
+# Align the reads using BWA
+ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR098283.fastq >  results/sai/SRR098283.aligned.sai
 
-- Again, reviewing your two scripts, are there additional commonalities across scripts
-or within scripts that we could optimize?
+# Convert the .sai file to SAM
+bwa samse data/ref_genome/ecoli_rel606.fasta results/sai/SRR098283.aligned.sai data/trimmed_fastq/SRR098283.fastq > \
+	results/sam/SRR098283.aligned.sam
+
+# Convert the SAM file to BAM
+samtools view -S -b results/sam/SRR098283.aligned.sam >  results/bam/SRR098283.aligned.bam
+
+# Sort the BAM file
+samtools sort -f results/bam/SRR098283.aligned.bam results/bam/SRR098283.aligned.sorted.bam
+
+### Variant calling
+
+# Counting read coverage
+samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
+
+# Identify SNPs
+bcftools view -bvcg results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
+
+# Filter SNPs
+bcftools view results/bcf/SRR098283_variants.bcf | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR098283_final_variants.vcf
+
+```
+
+2. At the moment this script will only call variants for `SRR098283.fastq`, but we want to grant it more flexibility so that it can be run on any FASTQ file that we give it as input.
+
+We can specify a filename as input using **positional parameters**. Positional parameters allow flexibility within a script.
+
+The command-line arguments $1, $2, $3,...$9 are positional parameters, with $0 pointing to the actual command, program or shell script, and $1, $2, $3, ...$9 as the arguments to the command." This basically means that "Script Name" == $0, "First Parameter" == $1, "Second Parameter" == $2 and so on...
+
+At the start of the script let's create a variable that captures an input parameter that must be supplied with the script name, when the user is running it. This input parameter will be the name of the file we want to work on:
+	
+	# Get input file	
+	fq=$1
 
 
-#### Exercise III - Granting our Workflow More Flexibility
+But, wait! What about the ouput files? They are all named using the SRA ID from the original FASTQ file. We can use a unix command to extract the base name of the file (without the path and .fastq extension) and ue this for naming all of the output files. We'll assign it to the `$base` variable:
 
-A couple of changes need to be made to make this script more friendly to both changes
-in the workflow and changes in files. 
+	# Grab base of filename for future naming
+	base=`basename $fq .fastq`
 
-The first major change is allowing a change in the filename. Thus at the start of 
-the script let's capture an input parameter that must be supplied with the script name.
-This input parameter will be the name of the file we want to work on:
+Now, wherever we see an output file that contains `SRR098283` we can substitute that with `$base`, and where the input file is required we replace that with `$fq`. For example:
 
-     fq="$1"
 
-And we'll add a shortcut to store the location to the genome reference FASTA file:
+	# Align the reads using BWA
+	bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/$fq >  results/sai/$base.aligned.sai
+
+
+3. We can go a step further in flexibility. Since we've already created our output directories, we can now specify all of the paths for our output files in their proper locations. We will assign various **filenames and location to variables** both for convenience but also to make it easier to see what  is going on in the command below.
+
+```bash
+
+# set up output filenames and locations
+sai=results/sai/$base.aligned.sai
+sam=results/sam/$base.aligned.sam
+bam=results/bam/${base}_aligned.bam
+sorted_bam=results/bam/$base.aligned.sorted.bam
+raw_bcf=results/bcf/$base_raw.bcf
+variants=results/bcf/$base_variants.bcf
+final_variants=results/vcf/$base_final_variants.vcf
+
+```
+
+4.  We can also add a **shortcut** to store the location to the **genome reference** FASTA file. Now for commands that use the genome (i.e bwa and samtools) we can run them using the genome variable (`$genome`) so these values are not static and hard-coded.
 
      # location to genome reference FASTA file
      genome=data/ref_genome/ecoli_rel606.fasta
 
 
-Now, walking thru the code, we can make some substitutions. To index with bwa and samtools
-we can run those commands on the genome variable ($genome) so these values aren't 
-static & hardcoded:
 
-     bwa index $genome
-     samtools faidx $genome
+5. Finally, when you are writing a multi-step workflow that accepts command-line options (positional parameters), it is very important to **have the usage right in the beginning of the script**. In addition to the usage, it is a good practice to comment about the inputs, steps/tools and output briefly. It is easier to fill both of these in after your script is ready and you have done a test run. So even though this is at the top of the script, it may be the last few lines you add to the script.
 
-We'll keep the output paths creation, as it looks fine. (Though really, we could
-put results/ in a variable and declare that at the top, so we can change where the
-results will be as well. We'll leave that for an optional exercise)
+Now, walking thru the code, we can make some substitutions as described above. We will also add a command at the beginning of the script to change directories into `~/dc_workshop` so that this script can be run from any location.
 
-     # make all of our output directories
-     mkdir -p results/sai
-     mkdir -p results/sam
-     mkdir -p results/bam
-     mkdir -p results/bcf
-     mkdir -p results/vcf
 
-In the script, it is a good idea to use `echo` for debugging/reporting to the screen
+```bash
 
-    echo "Processing file $fq ..."
+#!/bin/bash
 
-We also need to use one special trick, to extract the base name of the file
-(without the path and .fastq extension). We'll assign it
-to the $base variable
+# USAGE: sh run_variant_calling_on_file.sh <fastq file> 
+# This script will take the location and name of a fastq file and perform the following steps on it in a new directory. 
+    ## starting with alignment using bwa-backtrack
+    ## convert the .sai to SAM -> BAM -> sorted BAM, 
+    ## counting read coverage with samtools, 
+    ## identify SNPs and filter SNPs.
 
-    # grab base of filename for future naming
-    base=$(basename $fq .fastq)
-    echo "basename is $base"
 
-Since we've already created our output directories, we can now specify all of our
-output files in their proper locations. We will assign various file names to
- variables both for convenience but also to make it easier to see what 
-is going on in the sommand below.
+cd ~/dc_workshop
 
-    # set up output filenames and locations
-    fq=data/trimmed_fastq/$base\.fastq
-    sai=results/sai/$base\_aligned.sai
-    sam=results/sam/$base\_aligned.sam
-    bam=results/bam/$base\_aligned.bam
-    sorted_bam=results/bam/$base\_aligned_sorted.bam
-    raw_bcf=results/bcf/$base\_raw.bcf
-    variants=results/bcf/$base\_variants.bcf
-    final_variants=results/vcf/$base\_final_variants.vcf
+# Get input file	
+fq=$1
 
-Our data are now staged.  We now need to change the series of command below
-to use our variables so that it will run with more flexibility the steps of the 
-analytical workflow:
 
-    # Align the reads to the reference genome
-    bwa aln $genome $fq > $sai
+# Grab base of filename for future naming
+base=`basename $fq .fastq`
 
-    # Convert the output to the SAM format
-    bwa samse $genome $sai $fq > $sam
 
-    # Convert the SAM file to BAM format
-    samtools view -S -b $sam > $bam
+# set up output filenames and locations
+sai=results/sai/$base.aligned.sai
+sam=results/sam/$base.aligned.sam
+bam=results/bam/${base}_aligned.bam
+sorted_bam=results/bam/$base.aligned.sorted.bam
+raw_bcf=results/bcf/$base_raw.bcf
+variants=results/bcf/$base_variants.bcf
+final_variants=results/vcf/$base_final_variants.vcf
 
-    # Sort the BAM file
-    samtools sort -O 'bam' -T temp.prefix $bam $sorted_bam
+# location to genome reference FASTA file
+genome=data/ref_genome/ecoli_rel606.fasta
 
-    # Index the BAM file for display purposes
-    samtools index $sorted_bam
+### Alignmemt
 
-    # Do the first pass on variant calling by counting read coverage
-    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
+# Align the reads using BWA
+ bwa aln $genome data/trimmed_fastq/$fq > $sai
 
-    # Do the SNP calling with bcftools
-    bcftools call -vc -O b $raw_bcf > $variants
+# Convert the .sai file to SAM
+bwa samse $genome $sai $fq > $sam
 
-    # And finally, filter the SNPs for the final output
-    bcftools view $variants | vcfutils.pl varFilter - > $final_variants
+# Convert the SAM file to BAM
+samtools view -S -b $sam >  $bam
 
-This new script is now ready for running:
-	
-	sh run_variant_call_on_file.sh <name of fastq>
+# Sort the BAM file
+samtools sort -f $sam $sorted_bam
 
-#### Exercise IV - Parallelizing workflow for efficiency - NEEDS TO CHANGE
+### Variant calling
 
-To run the same script on a worker node on the cluster via the job scheduler, we need to add our **SLURM directives** at the **beginning** of the script. This is so that the scheduler knows what resources we need in order to run our job on the
-compute node(s). 
+# Counting read coverage
+samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
 
-Copy the `run_variant_call_on_file.sh` file and give it a new name `run_variant_call_on_file.sbatch`. Add the SLURM directives to the beginning of the file.
+# Identify SNPs
+bcftools view -bvcg $raw_bcf > $variants
 
-So the top of the file should look like:
+# Filter SNPs
+bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+```
 
-    #!/bin/bash
-    #
-    #SBATCH -p serial_requeue   # Partition to submit to (comma separated)
-    #SBATCH -n 1                # Number of cores
-    #SBATCH -N 1                # Ensure that all cores are on one machine
-    #SBATCH -t 0-1:00           # Runtime in D-HH:MM (or use minutes)
-    #SBATCH --mem 100           # Memory in MB
-    #SBATCH -J var_call_ecoli      # Job name
-    #SBATCH -o var_call_ecoli.out       # File to which standard out will be written
-    #SBATCH -e var_call_ecoli.err       # File to which standard err will be written
-    #SBATCH --mail-type=ALL     # Type of email notification: BEGIN,END,FAIL,ALL
-    #SBATCH --mail-user=<your-email@here.com> # Email to which notifications will be sent 
 
-What we'd like to do is run this script on a compute node for every trimmed FASTQ -- pleasantly parallelizing our workflow. And now is where we'll use the for loop with the power of the cluster: 
 
-    for fq in data/trimmed_fastq/*.fastq
-    do
-      sbatch run_variant_call_on_file.sh $fq
-      sleep 1
-    done
 
-What you should see on the output of your screen would be the jobIDs that are returned
-from the scheduler for each of the jobs that you submitted.
 
-You can see their progress by using the squeue command (though there is a lag of
-about 60 seconds between what is happening and what is reported).
 
-Don't forget about the scancel command, should something go wrong and you need to
-cancel your jobs.
 
-* Change the script so that one can include an additional variable to point to
- a results directory.
+
