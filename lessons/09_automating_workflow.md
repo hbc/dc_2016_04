@@ -11,7 +11,7 @@ Approximate time: 75 minutes
 * Automate a workflow by grouping a series of sequential commands into a script
 * Modify the script to grant it more flexibility 
 
-## Calling Variants from all files?
+## Calling Variants from all files
 
 That was a lot of work, yes? But you have five more FASTQ files to go...
 
