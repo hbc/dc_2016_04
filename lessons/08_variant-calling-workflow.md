@@ -15,24 +15,8 @@ Approximate time: 120 minutes
 
 ## Setting up
 
-To get started with this lesson, we will need to grab some data from an outside server using `wget` on the command line.
+To get started with this lesson, make sure you are in your home directory first:
 
-Make sure you are in your home directory first:
-
-```bash
-$ cd ~
-$ wget http://reactomerelease.oicr.on.ca/download/archive/variant_calling.tar.gz
-```
-
-The file 'variant_calling.tar.gz' is what is commonly called a "tarball", which is
-a compressed archive similar to the .zip files we have seen before.  We can decompress
-this archive using the command below.
-
-```bash
-$ tar -zxvf variant_calling.tar.gz
-```
-This will create a directory tree that contains some input data (reference genome and fastq files)
-and a shell script that details the series of commands used to run the variant calling workflow.
 
 <pre>
 variant_calling
@@ -50,18 +34,12 @@ variant_calling
 </pre>
 
 
-We are going to copy over these files into the project directory that we have created. But first let's remove the trimmed files we created so that we do not get confused with these new ones. We use the `-r` parameter to indicate that we are removing the entore directory.
-
-```bash
-$ rm -r dc_workshop/data/trimmed_fastq/
-```
 
 Now let's copy over the files we need, the reference data required for alignment and the full set of 6 FASTQ files.
 
 
 ```bash
 $ cp -r variant_calling/data/ref_genome/ dc_workshop/data/
-$ cp -r variant_calling/data/trimmed_fastq/ dc_workshop/data/
 ```
 
 Change directories to the `dc_workshop` directory:
