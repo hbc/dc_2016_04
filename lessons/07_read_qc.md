@@ -128,7 +128,7 @@ Create three three subdirectories
 
 Move our sample data to our working (home) directory
 
-	$ mv ~/dc_sample_data/untrimmed_fastq/ ~/dc_workshop/data/
+	$ mv ~/.dc_sampledata_lite/untrimmed_fastq/ ~/dc_workshop/data/
 
 #### Run FastQC
 
