@@ -15,11 +15,17 @@ Approximate time: 120 minutes
 
 ## Setting up
 
-To get started with this lesson, make sure you are in your home directory first:
+To get started with this lesson, make sure you are in `dc_workshop`. Now let's copy over the reference data required for alignment:
 
+```bash
+$ cd ~/dc_workshop
+$ cp -r ~/.dc_sampledata_lite/data/ref_genome/ data/
+```
+
+Your directory structure should now look like this:
 
 <pre>
-variant_calling
+dc_workshop
 ├── data
     ├── ref_genome
         └── ecoli_rel606.fasta
@@ -30,23 +36,10 @@ variant_calling
         ├── SRR098028.fastq
         ├── SRR098281.fastq
         └── SRR098283.fastq
-└── run_variant_calling.sh
+
 </pre>
 
-
-
-Now let's copy over the files we need, the reference data required for alignment and the full set of 6 FASTQ files.
-
-
-```bash
-$ cp -r variant_calling/data/ref_genome/ dc_workshop/data/
-```
-
-Change directories to the `dc_workshop` directory:
-
-	$ cd ~/dc_workshop
-
-And create directories for the results that will be generated as part of the workflow: 
+You will also need to create directories for the results that will be generated as part of the workflow: 
 
 	$ mkdir  results/sai results/sam results/bam results/bcf results/vcf
 
