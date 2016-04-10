@@ -29,6 +29,7 @@ dc_workshop
 ├── data
     ├── ref_genome
         └── ecoli_rel606.fasta
+    ├── untrimmed_fastq
     └── trimmed_fastq
         ├── SRR097977.fastq
         ├── SRR098026.fastq
