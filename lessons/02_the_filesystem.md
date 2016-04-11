@@ -147,7 +147,7 @@ Now we're going to try a hunt.  Find a hidden directory in `dc_sample_data` and 
 Hint: hidden files and folders in unix start with '.', for example .my_hidden_directory
 * * * 
 
-## Full vs. Relative Paths
+### Full vs. Relative Paths
 
 The `cd` command takes an argument which is the directory
 name. Directories can be specified using either a *relative path* or a
@@ -246,6 +246,8 @@ the intermediate directory.
 List the 'SRR097977.fastq' file from your home directory without changing directories
 ****
 
+## Saving time with other shortcuts
+
 ### Shortcut: Tab Completion
 
 Navigate to the home directory. 
@@ -267,9 +269,8 @@ are multiple directories in the home directory which start with
 `SR`. Thus, the shell does not know which one to fill in. When you hit
 tab again, the shell will list the possible choices.
 
-## Saving time with other shortcuts
 
-### Shortcuts
+### Shortcuts: Other
 
 There are several shortcuts which you should know about, but today we are going to talk about only a few. As you continue to work with the shell and on the terminal a lot more, you will come across and hopefully adapt many other shortcuts. 
 
