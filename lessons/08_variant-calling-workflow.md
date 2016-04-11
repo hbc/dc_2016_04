@@ -117,8 +117,8 @@ $ head results/sam/SRR098283.aligned.sam
 ```	
 Now convert the SAM file to BAM format for use by downstream tools: 
 ```
-    $ samtools view -S -b results/sam/SRR098283.aligned.sam > \
-    results/bam/SRR098283.aligned.bam
+$ samtools view -S -b results/sam/SRR098283.aligned.sam > \
+results/bam/SRR098283.aligned.bam
 ```
 ### Sort BAM file by coordinates
 
