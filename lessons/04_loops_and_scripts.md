@@ -174,7 +174,7 @@ cd ~/dc_sample_data/untrimmed_fastq
 And now we loop over all the FASTQs:
 
 ```bash
-for filename in *.fastq;
+for filename in *.fastq
 ```
 
 and we execute the commands for each loop:
@@ -182,17 +182,17 @@ and we execute the commands for each loop:
 ```bash
 do
   # tell us what file we're working on
-  echo $filename;
+  echo $filename
   
   # grab all the bad read records into new file
-  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq;
+  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq
 ``` 
   
 We'll also count the number of these reads and put that in a new file, using the count flag of `grep`:
 
 ```bash
-# grab the number of bad reads and write it to a summary file
-grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary;
+  # grab the number of bad reads and write it to a summary file
+  grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary
 done
 ```
 
@@ -205,17 +205,18 @@ And now, as a best practice of capturing all of our work into a running summary 
 cat bad-reads.count.summary >> ../runlog.txt
 ```
 
-You're script should look like:
+Your script (without comments) should look like:
 
 ```bash
 #!/bin/bash
 
 cd ~/dc_sample_data/untrimmed_fastq
 
-for filename in *.fastq; do 
-echo $filename;
-grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq;
-grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary;
+for filename in *.fastq; 
+do 
+  echo $filename;
+  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq;
+  grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary;
 done
 
 cat bad-reads.count.summary >> ../runlog.txt
@@ -231,14 +232,15 @@ Save and exit `nano`, and voila! You now have a script you can use to assess the
 cd ~/dc_sample_data/untrimmed_fastq
 
 # count bad reads for each FASTQ file in our directory
-for filename in *.fastq; do 
-  echo $filename; 
+for filename in *.fastq 
+do 
+  echo $filename
 
   # grab all the bad read records
-  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq;
+  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq
 
   # grab the number of bad reads and write it to a summary file
-  grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary;
+  grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary
 done
 
 # and add this summary to our run log
@@ -248,15 +250,14 @@ cat bad-reads.count.summary >> ../runlog.txt
 
 To run this script, we simply enter the following command:
 
-```bash
-$ sh generate_bad_reads_summary.sh
-```
+	$ sh generate_bad_reads_summary.sh
+
 
 To keep your data organized, let's move all of the bad read files out of our `untrimmed_fastq` directory into a new directory called `other`.
 
-`$ mkdir ../other`
+	$ mkdir ../other
 
-`$ mv ~/dc_sample_data/untrimmed_fastq/*bad* ~/dc_sample_data/other`
+	$ mv ~/dc_sample_data/untrimmed_fastq/*bad* ~/dc_sample_data/other
 
 
 ---
