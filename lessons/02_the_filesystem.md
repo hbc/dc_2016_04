@@ -66,7 +66,7 @@ behavior. For example, `-F` and `-l` are arguments to `ls`.  The `ls`
 program, like many programs, take a lot of arguments. Another useful one is '-a',
 which shows everything, including hidden files.
 
-How do we know what the arguments are available for particular commands? Most commonly used shell programs have a manual. You can access the
+How do we know what arguments are available for particular commands? Most commonly used shell programs have a manual. You can access the
 manual using the `man` program. Try entering:
 
     $ man ls
