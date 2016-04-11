@@ -274,7 +274,7 @@ Change directories to your home directory, and list the contents of `dc_sample_d
 
 There are several shortcuts which you should know about, but today we are going to talk about only a few. As you continue to work with the shell and on the terminal a lot more, you will come across and hopefully adapt many other shortcuts. 
 
-Dealing with thehome directory is very common. So, in the shell the tilde character,
+Dealing with the home directory is very common. So, in the shell the tilde character,
 "~", is a shortcut for your home directory. Navigate to the `dc_sample_data/sra_metadata/`
 directory:
 
