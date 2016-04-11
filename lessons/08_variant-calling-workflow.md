@@ -17,9 +17,9 @@ Approximate time: 120 minutes
 
 To get started with this lesson, make sure you are in `dc_workshop`. Now let's copy over the reference data required for alignment:
 
-```bash
+```
 $ cd ~/dc_workshop
-$ cp -r ~/.dc_sampledata_lite/data/ref_genome/ data/
+$ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
 ```
 
 Your directory structure should now look like this:
@@ -41,8 +41,9 @@ dc_workshop
 </pre>
 
 You will also need to create directories for the results that will be generated as part of the workflow: 
-
+```
 	$ mkdir  results/sai results/sam results/bam results/bcf results/vcf
+```
 
 > *NOTE: All of the tools that we will be using in this workflow have been pre-installed on our remote computer*
 
@@ -64,7 +65,7 @@ Our first step is to index the reference genome for use by BWA. *NOTE: This only
 	
 Eventually we will loop over all of our files to run this workflow on all of our samples, but for now we're going to work on just one sample in our dataset `SRR098283.fastq`:
 
-```bash
+```
 ls -alh ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq
 ```
 
@@ -75,11 +76,11 @@ The alignment process consists of choosing an appropriate reference genome to ma
 Since we are working with short reads we will be using BWA-backtrack. The usage for BWA-backtrack is `bwa aln path/to/ref_genome.fasta path/to/fastq > SAIfile`. This will create a `.sai` file which is an intermediate file containing the suffix array indexes. 
     
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using and try to understand the options.*
-
-    bwa aln data/ref_genome/ecoli_rel606.fasta \
+```
+    $ bwa aln data/ref_genome/ecoli_rel606.fasta \
     data/trimmed_fastq/SRR098283.fastq > \
     results/sai/SRR098283.aligned.sai
-
+```
 ## Alignment cleanup
 
 ![workflow_clean](../img/variant_calling_workflow_cleanup.png)
@@ -104,26 +105,26 @@ The file begins with a **header**, which is optional. The header is used to desc
 ![sam_bam2](../img/sam_bam3.png)
 
 First we will use the `bwa samse` command to convert the .sai file to SAM format:
-
-	bwa samse data/ref_genome/ecoli_rel606.fasta \
-	results/sai/SRR098283.aligned.sai \
-	data/trimmed_fastq/SRR098283.fastq > \
-	results/sam/SRR098283.aligned.sam
-
+```
+	$ bwa samse data/ref_genome/ecoli_rel606.fasta \
+	> results/sai/SRR098283.aligned.sai \
+	> data/trimmed_fastq/SRR098283.fastq > \
+	> results/sam/SRR098283.aligned.sam
+```
 Explore the information within your SAM file:
 
 	head results/sam/SRR098283.aligned.sam
 	
 Now convert the SAM file to BAM format for use by downstream tools: 
-
-    samtools view -S -b results/sam/SRR098283.aligned.sam > \
-    results/bam/SRR098283.aligned.bam
-
+```
+    $ samtools view -S -b results/sam/SRR098283.aligned.sam > \
+    > results/bam/SRR098283.aligned.bam
+```
 ### Sort BAM file by coordinates
 
 Sort the BAM file:
 
-    samtools sort -f results/bam/SRR098283.aligned.bam results/bam/SRR098283.aligned.sorted.bam
+    $ samtools sort -f results/bam/SRR098283.aligned.bam results/bam/SRR098283.aligned.sorted.bam
 
 *SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.*
 
@@ -138,8 +139,8 @@ A variant call is a conclusion that there is a nucleotide difference vs. some re
 
 Do the first pass on variant calling by counting read coverage with samtools [mpileup](http://samtools.sourceforge.net/mpileup.shtml):
 
-    samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
-      results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
+    $ samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
+    > results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
 
 ***We have only generated a file with coverage information for every base with the above command; to actually identify variants, we have to use a different tool from the samtools suite called [bcftools](https://samtools.github.io/bcftools/bcftools.html).***
 
@@ -147,19 +148,19 @@ Do the first pass on variant calling by counting read coverage with samtools [mp
 
 Identify SNPs using bcftools:
 
-    bcftools view -bvcg results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
+    $ bcftools view -bvcg results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
 
 ### Step 3: Filter and report the SNP variants in VCF (variant calling format)
 
 Filter the SNPs for the final output in VCF format, using vcfutils.pl:
 
-    bcftools view results/bcf/SRR098283_variants.bcf | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR098283_final_variants.vcf
+    $ bcftools view results/bcf/SRR098283_variants.bcf | /usr/share/samtools/vcfutils.pl varFilter - > 		results/vcf/SRR098283_final_variants.vcf
 	
 *`bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform the filtering. Note that the output is in VCF format, which is a text format.*
 
 ## Explore the VCF format:
 
-	less results/vcf/SRR098283_final_variants.vcf
+	$ less results/vcf/SRR098283_final_variants.vcf
 
 You will see the **header** which describes the format, when the file was created, the tools version along with the command line parameters used and some additional column information:
 
@@ -218,7 +219,7 @@ The BROAD's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=126
 
 Index the BAM file for visualization with IGV:
 
-    samtools index results/bam/SRR098283.aligned.sorted.bam
+    $ samtools index results/bam/SRR098283.aligned.sorted.bam
 
 **Transfer files to your laptop**
 
