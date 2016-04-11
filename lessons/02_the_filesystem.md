@@ -344,7 +344,7 @@ The '*' is expanded to include any file that ends with '.fastq'
 ****
 **Exercise**
 
-1. List the contents of the ../../bin directory. Do you see anything
+1. List the contents of the /bin directory. Do you see anything
 familiar in there? How can you tell these are programs rather than plain files?
 
 2. Do each of the following using a single `ls` command without
@@ -421,7 +421,7 @@ What does this file contain?
 **Exercises**
 
 1.  Print out the contents of the `~/dc_sample_data/untrimmed_fastq/SRR097977.fastq`
-    file. What does this file contain?
+    file to your terminal. What does this file contain?
 
 2.  From your home directory, without changing directories,
     use one short command to print the contents of all of the files in
