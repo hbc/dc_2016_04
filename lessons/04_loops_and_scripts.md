@@ -104,7 +104,7 @@ Looping is a concept shared by several programming languages, and its implementa
 The structure or the syntax of (*for*) loops in bash is as follows:
 
 ```
-$ for (variable_name) in (list)
+for (variable_name) in (list)
 > do
 >   (command $variable_name) 
 > done
@@ -168,7 +168,7 @@ This line is the absolute path to the Bash interpreter. The shebang line ensures
 After the shebang line, we enter the commands we want to execute. First we want to move into our `untrimmed_fastq` directory:
 
 ```
-$ cd ~/dc_sample_data/untrimmed_fastq
+cd ~/dc_sample_data/untrimmed_fastq
 ```
 
 And now we loop over all the FASTQs:
