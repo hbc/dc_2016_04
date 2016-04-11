@@ -212,11 +212,11 @@ Your script (without comments) should look like:
 
 cd ~/dc_sample_data/untrimmed_fastq
 
-for filename in *.fastq; 
+for filename in *.fastq
 do 
-  echo $filename;
-  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq;
-  grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary;
+  echo $filename
+  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq
+  grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary
 done
 
 cat bad-reads.count.summary >> ../runlog.txt
