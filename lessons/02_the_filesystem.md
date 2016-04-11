@@ -147,65 +147,6 @@ Now we're going to try a hunt.  Find a hidden directory in `dc_sample_data` and 
 Hint: hidden files and folders in unix start with '.', for example .my_hidden_directory
 * * * 
 
-
-### Examining the contents of other directories
-
-By default, the `ls` commands lists the contents of the working
-directory (i.e. the directory you are in). You can always find the
-directory you are in using the `pwd` command. However, you can also
-give `ls` the names of other directories to view. 
-
-Navigate to the home directory if you are not already there.
-
-Type:
-
-	$ cd
-
-Then enter the command:
-
-	$ ls dc_sample_data
-
-This will list the contents of the `dc_sample_data` directory without
-you having to navigate there.
-
-The `cd` command works in a similar way. Try entering:
-
-	$ cd
-	
-	$ cd dc_sample_data/untrimmed_fastq
-	
-	$ pwd
-
-You will jump directly to `untrimmed_fastq` without having to step through
-the intermediate directory.
-
-****
-**Exercise**
-
-List the 'SRR097977.fastq' file from your home directory without changing directories
-****
-
-### Shortcut: Tab Completion
-
-Navigate to the home directory. 
-
-Typing out directory names can waste a
-lot of time. When you start typing out the name of a directory, then
-hit the tab key, the shell will try to fill in the rest of the
-directory name. For example, type `cd` to get back to your home directy, then enter:
-
-	$ cd dc_<tab>
-
-The shell will fill in the rest of the directory name for
-`dc_sample_data`. Now go to `dc_sample_data/untrimmed_fastq`
-
-	$ ls SR<tab><tab>
-
-When you hit the first tab, nothing happens. The reason is that there
-are multiple directories in the home directory which start with
-`SR`. Thus, the shell does not know which one to fill in. When you hit
-tab again, the shell will list the possible choices.
-
 ## Full vs. Relative Paths
 
 The `cd` command takes an argument which is the directory
@@ -267,6 +208,64 @@ navigate amongst them.
 Change directories to your home directory, and list the contents of `dc_sample_data/sra_metadata/` without changing directories again.
 
 ***
+
+### Examining the contents of other directories
+
+By default, the `ls` commands lists the contents of the working
+directory (i.e. the directory you are in). You can always find the
+directory you are in using the `pwd` command. However, you can also
+give `ls` the names of other directories to view. 
+
+Navigate to the home directory if you are not already there.
+
+Type:
+
+	$ cd
+
+Then enter the command:
+
+	$ ls dc_sample_data
+
+This will list the contents of the `dc_sample_data` directory without
+you having to navigate there.
+
+The `cd` command works in a similar way. Try entering:
+
+	$ cd
+	
+	$ cd dc_sample_data/untrimmed_fastq
+	
+	$ pwd
+
+You will jump directly to `untrimmed_fastq` without having to step through
+the intermediate directory.
+
+****
+**Exercise**
+
+List the 'SRR097977.fastq' file from your home directory without changing directories
+****
+
+### Shortcut: Tab Completion
+
+Navigate to the home directory. 
+
+Typing out directory names can waste a
+lot of time. When you start typing out the name of a directory, then
+hit the tab key, the shell will try to fill in the rest of the
+directory name. For example, type `cd` to get back to your home directy, then enter:
+
+	$ cd dc_<tab>
+
+The shell will fill in the rest of the directory name for
+`dc_sample_data`. Now go to `dc_sample_data/untrimmed_fastq`
+
+	$ ls SR<tab><tab>
+
+When you hit the first tab, nothing happens. The reason is that there
+are multiple directories in the home directory which start with
+`SR`. Thus, the shell does not know which one to fill in. When you hit
+tab again, the shell will list the possible choices.
 
 ## Saving time with other shortcuts
 
