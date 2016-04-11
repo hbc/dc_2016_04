@@ -66,7 +66,7 @@ Our first step is to index the reference genome for use by BWA. *NOTE: This only
 Eventually we will loop over all of our files to run this workflow on all of our samples, but for now we're going to work on just one sample in our dataset `SRR098283.fastq`:
 
 ```
-$ ls -alh ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq
+$ ls -alh ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq 
 ```
 
 ### Align reads to reference genome
@@ -78,7 +78,7 @@ Since we are working with short reads we will be using BWA-backtrack. The usage 
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using and try to understand the options.*
 ```
 $ bwa aln data/ref_genome/ecoli_rel606.fasta \
-> data/trimmed_fastq/SRR098283.fastq > \
+> data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
 > results/sai/SRR098283.aligned.sai
 ```
 ## Alignment cleanup
@@ -108,7 +108,7 @@ First we will use the `bwa samse` command to convert the .sai file to SAM format
 ```
 	$ bwa samse data/ref_genome/ecoli_rel606.fasta \
 	> results/sai/SRR098283.aligned.sai \
-	> data/trimmed_fastq/SRR098283.fastq > \
+	> data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
 	> results/sam/SRR098283.aligned.sam
 ```
 Explore the information within your SAM file:
