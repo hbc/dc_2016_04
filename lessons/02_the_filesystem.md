@@ -417,10 +417,7 @@ What does this file contain?
 ****
 **Exercises**
 
-1.  Print out the contents of the `~/dc_sample_data/untrimmed_fastq/SRR097977.fastq`
-    file to your terminal. What does this file contain?
-
-2.  From your home directory, without changing directories,
+From your home directory, without changing directories,
     use one short command to print the contents of all of the files in
     the `/home/dcuser/dc_sample_data/untrimmed_fastq` directory.
 
