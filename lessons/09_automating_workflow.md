@@ -38,33 +38,36 @@ for you. Name your script *run_variant_call_on_file.sh*.
 ### Alignmemt
 
 # Align the reads using BWA
- bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR098283.fastq >  results/sai/SRR098283.aligned.sai
+ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR097977.fastq_trim.fastq \
+    > results/sai/SRR097977.aligned.sai
 
 # Convert the .sai file to SAM
-bwa samse data/ref_genome/ecoli_rel606.fasta results/sai/SRR098283.aligned.sai data/trimmed_fastq/SRR098283.fastq > \
-	results/sam/SRR098283.aligned.sam
+bwa samse data/ref_genome/ecoli_rel606.fasta results/sai/SRR097977.aligned.sai \
+     data/trimmed_fastq/SRR097977.fastq > results/sam/SRR097977.aligned.sam
 
 # Convert the SAM file to BAM
-samtools view -S -b results/sam/SRR098283.aligned.sam >  results/bam/SRR098283.aligned.bam
+samtools view -S -b results/sam/SRR097977.aligned.sam >  results/bam/SRR097977.aligned.bam
 
 # Sort the BAM file
-samtools sort -f results/bam/SRR098283.aligned.bam results/bam/SRR098283.aligned.sorted.bam
+samtools sort -f results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted.bam
 
 ### Variant calling
 
 # Counting read coverage
-samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
+samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
+      results/bam/SRR097977.aligned.sorted.bam > results/bcf/SRR097977_raw.bcf
 
 # Identify SNPs
-bcftools view -bvcg results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
+bcftools view -bvcg results/bcf/SRR097977_raw.bcf > results/bcf/SRR097977_variants.bcf
 
 # Filter SNPs
-bcftools view results/bcf/SRR098283_variants.bcf | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR098283_final_variants.vcf
+bcftools view results/bcf/SRR097977_variants.bcf \
+       | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR097977_final_variants.vcf
 
 ```
 
 ### Positional parameters (input files)
-At the moment this script will only call variants for `SRR098283.fastq`, but we want to grant it more flexibility so that it can be run on any FASTQ file that we give it as input.
+At the moment this script will only call variants for `SRR097977`, but we want to grant it more flexibility so that it can be run on any FASTQ file that we give it as input.
 
 We can specify a filename as input using **positional parameters**. Positional parameters allow flexibility within a script.
 
@@ -80,9 +83,9 @@ At the start of the script let's create a variable that captures an input parame
 But, wait! What about the ouput files? They are all named using the SRA ID from the original FASTQ file. We can use a unix command to extract the base name of the file (without the path and .fastq extension) and ue this for naming all of the output files. We'll assign it to the `$base` variable:
 
 	# Grab base of filename for future naming
-	base=`basename $fq .fastq`
+	base=`basename $fq trim.fastq`
 
-Now, wherever we see an output file that contains `SRR098283` we can substitute that with `$base`, and where the input file is required we replace that with `$fq`. For example:
+Now, wherever we see an output file that contains `SRR097977` we can substitute that with `$base`, and where the input file is required we replace that with `$fq`. For example:
 
 
 	# Align the reads using BWA
