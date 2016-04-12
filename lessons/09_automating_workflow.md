@@ -49,7 +49,7 @@ bwa samse data/ref_genome/ecoli_rel606.fasta results/sai/SRR097977.aligned.sai \
 samtools view -S -b results/sam/SRR097977.aligned.sam >  results/bam/SRR097977.aligned.bam
 
 # Sort the BAM file
-samtools sort -f results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted.bam
+samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted.bam
 
 ### Variant calling
 
@@ -176,7 +176,7 @@ bwa samse $genome $sai $data/${base}.fastq_trim.fastq > $sam
 samtools view -S -b $sam >  $bam
 
 # Sort the BAM file
-samtools sort -f $sam $sorted_bam
+samtools sort $sam $sorted_bam
 
 ### Variant calling
 
