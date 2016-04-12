@@ -354,7 +354,7 @@ $ rm *trim.fastq
 $ for infile in *.fastq
   do
     outfile=${infile}_trim.fastq
-  java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+    java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
   done
 ```
 
