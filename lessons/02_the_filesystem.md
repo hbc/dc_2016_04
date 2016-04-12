@@ -200,13 +200,6 @@ Over time, it will become easier for you to keep a mental note of the
 structure of the directories that you are using and how to quickly
 navigate amongst them.
 
-***
-**Exercise**
-
-Change directories to your home directory, and list the contents of `dc_sample_data/sra_metadata/` without changing directories again.
-
-***
-
 ### Examining the contents of other directories
 
 By default, the `ls` commands lists the contents of the working
@@ -342,10 +335,12 @@ The '*' is expanded to include any file that ends with '.fastq'
 ****
 **Exercise**
 
-1. List the contents of the /bin directory. Do you see anything
+1. Change directories to your home directory, and list the contents of `dc_sample_data/sra_metadata/` without changing directories again.
+
+2. List the contents of the /bin directory. Do you see anything
 familiar in there? How can you tell these are programs rather than plain files?
 
-2. Do each of the following using a single `ls` command without
+3. Do each of the following using a single `ls` command without
 navigating to a different directory.
 
 	1.  List all of the files in `/bin` that start with the letter 'c
