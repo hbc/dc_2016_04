@@ -157,9 +157,9 @@ sai=results/sai/$base.aligned.sai
 sam=results/sam/$base.aligned.sam
 bam=results/bam/${base}_aligned.bam
 sorted_bam=results/bam/$base.aligned.sorted
-raw_bcf=results/bcf/$base_raw.bcf
-variants=results/bcf/$base_variants.bcf
-final_variants=results/vcf/$base_final_variants.vcf
+raw_bcf=results/bcf/${base}_raw.bcf
+variants=results/bcf/${base}_variants.bcf
+final_variants=results/vcf/${base}_final_variants.vcf
 
 # location to genome reference FASTA file
 genome=data/ref_genome/ecoli_rel606.fasta
