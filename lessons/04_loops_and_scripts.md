@@ -148,7 +148,7 @@ Pretty simple and cool, huh?
 	
 Now that you've learned how to use loops and variables, let's put this processing power to work. Imagine, if you will, a series of commands that would do the following for us each time we get a new data set:
 
-- Use for loop to iterate over each FASTQ file
+- Use the *for* loop to iterate over each FASTQ file
 - Dump out bad reads into a new file
 - Get the count of the number of bad reads and generate a summary file
 - And after all the FASTQ files are processed, write the summary to a log file
