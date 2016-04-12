@@ -461,7 +461,7 @@ the beginning and end of a file respectively.
 	$ tail SRR098026.fastq
 
 The `-n` option to either of these commands can be used to print the
-first or last `n` lines of a file. To print the first/last line of the
+first or last `n` lines of a file. To print the first line of the
 file use:
 
 	$ head -n 1 SRR098026.fastq
