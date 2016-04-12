@@ -156,7 +156,7 @@ echo "Starting analysis of" $base
 sai=results/sai/$base.aligned.sai
 sam=results/sam/$base.aligned.sam
 bam=results/bam/${base}_aligned.bam
-sorted_bam=results/bam/$base.aligned.sorted.bam
+sorted_bam=results/bam/$base.aligned.sorted
 raw_bcf=results/bcf/$base_raw.bcf
 variants=results/bcf/$base_variants.bcf
 final_variants=results/vcf/$base_final_variants.vcf
@@ -181,7 +181,7 @@ samtools sort $sam $sorted_bam
 ### Variant calling
 
 # Counting read coverage
-samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
+samtools mpileup -g -f $genome ${sorted_bam}.bam > $raw_bcf
 
 # Identify SNPs
 bcftools view -bvcg $raw_bcf > $variants
