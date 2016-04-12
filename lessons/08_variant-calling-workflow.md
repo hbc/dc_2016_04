@@ -148,8 +148,10 @@ A variant call is a conclusion that there is a nucleotide difference vs. some re
 
 Do the first pass on variant calling by counting read coverage with samtools [mpileup](http://samtools.sourceforge.net/mpileup.shtml):
 
-    $ samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
-    results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
+```bash
+$ samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
+            results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
+```
 
 ***We have only generated a file with coverage information for every base with the above command; to actually identify variants, we have to use a different tool from the samtools suite called [bcftools](https://samtools.github.io/bcftools/bcftools.html).***
 
@@ -157,19 +159,25 @@ Do the first pass on variant calling by counting read coverage with samtools [mp
 
 Identify SNPs using bcftools:
 
-    $ bcftools view -bvcg results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
+```bash
+$ bcftools view -bvcg results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
+```
 
 ### Step 3: Filter and report the SNP variants in VCF (variant calling format)
 
 Filter the SNPs for the final output in VCF format, using vcfutils.pl:
+```bash
+$ bcftools view results/bcf/SRR098283_variants.bcf \
+        | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR098283_final_variants.vcf
+```
 
-    $ bcftools view results/bcf/SRR098283_variants.bcf | /usr/share/samtools/vcfutils.pl varFilter - > 		results/vcf/SRR098283_final_variants.vcf
-	
 *`bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform the filtering. Note that the output is in VCF format, which is a text format.*
 
 ## Explore the VCF format:
 
-	$ less results/vcf/SRR098283_final_variants.vcf
+```bash
+$ less results/vcf/SRR098283_final_variants.vcf
+```
 
 You will see the **header** which describes the format, when the file was created, the tools version along with the command line parameters used and some additional column information:
 
@@ -228,14 +236,16 @@ The BROAD's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=126
 
 Index the BAM file for visualization with IGV:
 
-    $ samtools index results/bam/SRR098283.aligned.sorted.bam
+```bash
+$ samtools index results/bam/SRR098283.aligned.sorted.bam
+```
 
 **Transfer files to your laptop**
 
 Using FileZilla, transfer the following 3 files to your local machine, 
-`results/bam/SRR098283.aligned.sorted.bam`,
+`results/bam/SRR098283.aligned.sorted.bam`
 
-`results/bam/SRR098283.aligned.sorted.bam.bai`, 
+`results/bam/SRR098283.aligned.sorted.bam.bai`
 
 `data/ref_genome/ecoli_rel606.fasta`
 
