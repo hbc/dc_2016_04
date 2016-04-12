@@ -20,8 +20,9 @@ utility for searching plain-text data sets for lines matching a string or regula
 Let's give it a try!
 
 Suppose we want to see how many reads in our file have really bad, with 10 consecutive Ns  
-Let's search for the string NNNNNNNNNN in file 
+Let's search for the string NNNNNNNNNN in file `SRR098026.fastq` in the `untrimmed_fastq` folder:
 
+     $ cd ~/dc_sample_data/untrimmed_fastq/
      $ grep NNNNNNNNNN SRR098026.fastq
 
 We get back a lot of lines.  What is we want to see the whole fastq record for each of these read.
