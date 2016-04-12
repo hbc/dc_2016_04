@@ -242,7 +242,7 @@ $ samtools index results/bam/SRR098283.aligned.sorted.bam
 
 **Transfer files to your laptop**
 
-Using FileZilla, transfer the following 3 files to your local machine:
+Using FileZilla, transfer the following 4 files to your local machine:
 
 
 `results/bam/SRR098283.aligned.sorted.bam`
@@ -250,6 +250,8 @@ Using FileZilla, transfer the following 3 files to your local machine:
 `results/bam/SRR098283.aligned.sorted.bam.bai`
 
 `data/ref_genome/ecoli_rel606.fasta`
+
+`results/vcf/SRR098283_final_variants.vcf`
 
 **Visualize**	
 
