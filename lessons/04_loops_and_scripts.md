@@ -103,25 +103,25 @@ Looping is a concept shared by several programming languages, and its implementa
 
 The structure or the syntax of (*for*) loops in bash is as follows:
 
-```
+```bash
 for (variable_name) in (list)
-> do
->   (command $variable_name) 
-> done
+ do
+   (commands $variable_name) 
+ done
 ```
 
 where the ***variable_name*** defines (or initializes) a variable that takes the value of every member of the specified ***list*** one at a time. At each iteration, the loop retrieves the value stored in the variable (which is a member of the input list) and runs through the commands indicated between the `do` and `done` one at a time. *This syntax/structure is virtually set in stone.* 
 
 For example, we can run the same commands (`echo` and `wc -l`) used in the "Bash variables" section but this time run them sequentially on each file:
 
-```
+```bash
 $ ls  *.fastq		# list all files ending in .fastq
 
 $ for var in *.fastq
-> do
->   echo $var
->   wc -l $var
-> done
+ do
+   echo $var
+   wc -l $var
+ done
 ```
 
 ####What does this loop do? 
@@ -135,10 +135,10 @@ Of course, `var` is a useless variable name. But since it doesn't matter what va
 
 ```bash
 $ for filename in *.fastq
-> do
->   echo $filename
->   wc -l $filename
-> done
+ do
+   echo $filename
+   wc -l $filename
+ done
 ```
 In the long run, it's best to use a name that will help point out a variable's function, so your future self will understand what you are thinking now.
 
@@ -167,7 +167,7 @@ This line is the absolute path to the Bash interpreter. The shebang line ensures
 
 After the shebang line, we enter the commands we want to execute. First we want to move into our `untrimmed_fastq` directory:
 
-```
+``` bash
 cd ~/dc_sample_data/untrimmed_fastq
 ```
 
@@ -205,24 +205,6 @@ And now, as a best practice of capturing all of our work into a running summary 
 cat bad-reads.count.summary >> ../runlog.txt
 ```
 
-Your script (without comments) should look like:
-
-```bash
-#!/bin/bash
-
-cd ~/dc_sample_data/untrimmed_fastq
-
-for filename in *.fastq
-do 
-  echo $filename
-  grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq
-  grep -cH NNNNNNNNNN $filename >> bad-reads.count.summary
-done
-
-cat bad-reads.count.summary >> ../runlog.txt
-
-```
-
 Save and exit `nano`, and voila! You now have a script you can use to assess the quality of all your new datasets. Your finished script, complete with comments, should look like the following:
 
 ```bash
@@ -234,6 +216,7 @@ cd ~/dc_sample_data/untrimmed_fastq
 # count bad reads for each FASTQ file in our directory
 for filename in *.fastq 
 do 
+  # tell us what file we're working on	
   echo $filename
 
   # grab all the bad read records
