@@ -173,7 +173,7 @@ bwa aln $genome $data/${base}.fastq_trim.fastq > $sai
 bwa samse $genome $sai $data/${base}.fastq_trim.fastq > $sam
 
 # Convert the SAM file to BAM
-samtools view -S -b $sam >  $bam
+samtools view -S -b $sam > $bam
 
 # Sort the BAM file
 samtools sort $bam $sorted_bam
