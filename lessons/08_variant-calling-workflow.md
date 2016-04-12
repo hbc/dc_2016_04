@@ -70,7 +70,7 @@ $ bwa index data/ref_genome/ecoli_rel606.fasta     # This step helps with the sp
 Eventually we will loop over all of our files to run this workflow on all of our samples, but for now we're going to work on just one sample in our dataset `SRR098283.fastq`:
 
 ```bash
-$ ls -alh ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq 
+$ ls -alh ~/dc_workshop/data/trimmed_fastq/SRR097977.fastq_trim.fastq 
 ```
 
 ### Align reads to reference genome
@@ -83,7 +83,7 @@ Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml).
 
 ```bash
 $ bwa aln data/ref_genome/ecoli_rel606.fasta \
-    data/trimmed_fastq/SRR098283.fastq_trim.fastq > results/sai/SRR098283.aligned.sai
+    data/trimmed_fastq/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sai
 ```
 
 ## Alignment cleanup
@@ -113,26 +113,26 @@ First we will use the `bwa samse` command to convert the .sai file to SAM format
 
 ```bash
 $ bwa samse data/ref_genome/ecoli_rel606.fasta \
-      results/sai/SRR098283.aligned.sai \
-      data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
-      results/sam/SRR098283.aligned.sam
+      results/sai/SRR097977.aligned.sai \
+      data/trimmed_fastq/SRR097977.fastq_trim.fastq > \
+      results/sam/SRR097977.aligned.sam
 ```
 Explore the information within your SAM file:
 
 ```bash
-$ head results/sam/SRR098283.aligned.sam
+$ head results/sam/SRR097977.aligned.sam
 ```	
 Now convert the SAM file to BAM format for use by downstream tools: 
 
 ```bash
-$ samtools view -S -b results/sam/SRR098283.aligned.sam > results/bam/SRR098283.aligned.bam
+$ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.aligned.bam
 ```
 ### Sort BAM file by coordinates
 
 Sort the BAM file:
 
 ```bash
-$ samtools sort -f results/bam/SRR098283.aligned.bam results/bam/SRR098283.aligned.sorted.bam
+$ samtools sort -f results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted.bam
 ```
 
 *SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.*
@@ -150,7 +150,7 @@ Do the first pass on variant calling by counting read coverage with samtools [mp
 
 ```bash
 $ samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
-            results/bam/SRR098283.aligned.sorted.bam > results/bcf/SRR098283_raw.bcf
+            results/bam/SRR097977.aligned.sorted.bam > results/bcf/SRR097977_raw.bcf
 ```
 
 ***We have only generated a file with coverage information for every base with the above command; to actually identify variants, we have to use a different tool from the samtools suite called [bcftools](https://samtools.github.io/bcftools/bcftools.html).***
@@ -160,15 +160,15 @@ $ samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
 Identify SNPs using bcftools:
 
 ```bash
-$ bcftools view -bvcg results/bcf/SRR098283_raw.bcf > results/bcf/SRR098283_variants.bcf
+$ bcftools view -bvcg results/bcf/SRR097977_raw.bcf > results/bcf/SRR097977_variants.bcf
 ```
 
 ### Step 3: Filter and report the SNP variants in VCF (variant calling format)
 
 Filter the SNPs for the final output in VCF format, using vcfutils.pl:
 ```bash
-$ bcftools view results/bcf/SRR098283_variants.bcf \
-        | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR098283_final_variants.vcf
+$ bcftools view results/bcf/SRR097977_variants.bcf \
+        | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR097977_final_variants.vcf
 ```
 
 *`bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform the filtering. Note that the output is in VCF format, which is a text format.*
@@ -176,7 +176,7 @@ $ bcftools view results/bcf/SRR098283_variants.bcf \
 ## Explore the VCF format:
 
 ```bash
-$ less results/vcf/SRR098283_final_variants.vcf
+$ less results/vcf/SRR097977_final_variants.vcf
 ```
 
 You will see the **header** which describes the format, when the file was created, the tools version along with the command line parameters used and some additional column information:
@@ -237,7 +237,7 @@ The BROAD's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=126
 Index the BAM file for visualization with IGV:
 
 ```bash
-$ samtools index results/bam/SRR098283.aligned.sorted.bam
+$ samtools index results/bam/SRR097977.aligned.sorted.bam
 ```
 
 **Transfer files to your laptop**
@@ -245,13 +245,13 @@ $ samtools index results/bam/SRR098283.aligned.sorted.bam
 Using FileZilla, transfer the following 4 files to your local machine:
 
 
-`results/bam/SRR098283.aligned.sorted.bam`
+`results/bam/SRR097977.aligned.sorted.bam`
 
-`results/bam/SRR098283.aligned.sorted.bam.bai`
+`results/bam/SRR097977.aligned.sorted.bam.bai`
 
 `data/ref_genome/ecoli_rel606.fasta`
 
-`results/vcf/SRR098283_final_variants.vcf`
+`results/vcf/SRR097977_final_variants.vcf`
 
 **Visualize**	
 
