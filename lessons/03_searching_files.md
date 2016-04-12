@@ -130,7 +130,7 @@ learn to become proficient with the pipe and redirection operators:
 Finally, let's use the new tools in our kit and a few new ones to example our SRA metadata file.
 
 ```bash
-$ cd ~/dc_sample_data/sra_metadata/
+$ cd ../sra_metadata/
 $ ls
 ```
 
