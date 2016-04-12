@@ -16,13 +16,17 @@ date: 2014-07-30
 
 Now that we are connected to the cloud, we have file directories available to us to explore. Let's learn a few commands by investigating the folders in the `dc_sample_data` directory:
 
-	$ cd dc_sample_data
+```bash
+$ cd dc_sample_data
+```
 
 > `cd` stands for 'change directory'
 
 Let's see what is inside the folder. Type:
 
-	$ ls
+```bash
+$ ls
+```
 
 You will see:
 
@@ -33,8 +37,9 @@ You will see:
 
 There are two items listed.  What are they? We can use a command line "modifier" with `ls` to get more information; this modifier is called an argument (more below).
       
-	$ ls -F
-      
+```bash
+$ ls -F
+```      
 	sra_metadata/  untrimmed_fastq/
 	
 Anything with a "/" after it is a directory. Things with a "*" after them are programs. If there are no decorations after the name, it's a file.
