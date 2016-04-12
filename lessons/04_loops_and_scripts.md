@@ -240,7 +240,7 @@ To keep your data organized, let's move all of the bad read files out of our `un
 
 	$ mkdir ../other
 
-	$ mv ~/dc_sample_data/untrimmed_fastq/*bad* ~/dc_sample_data/other
+	$ mv *bad* ../other
 
 
 ---
