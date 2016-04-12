@@ -111,7 +111,7 @@ efficiently. If you want to be proficient at using the shell, you must
 learn to become proficient with the pipe and redirection operators:
 `|`, `>`, `>>`.
 
-
+## Practicing searching and redirection
 
 Finally, let's use the new tools in our kit and a few new ones to example our SRA metadata file.
 
