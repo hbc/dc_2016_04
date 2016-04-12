@@ -243,6 +243,8 @@ List the 'SRR097977.fastq' file from your home directory without changing direct
 
 Navigate to the home directory. 
 
+	$ cd
+
 Typing out directory names can waste a
 lot of time. When you start typing out the name of a directory, then
 hit the tab key, the shell will try to fill in the rest of the
