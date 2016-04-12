@@ -404,28 +404,18 @@ contents of directories, but how do we look at the contents of files?
 The easiest way (but really not the ideal way in most situations) to examine a file is to just print out all of the
 contents using the command `cat`. Enter the following command:
 	
-	$ cd ~/dc_sample_data/untrimmed_fastq/
-	$ cat SRR098026.fastq
+	$ cd ~/dc_sample_data/sra_metadata
+	$ cat SraRunTable.txt 
 
-This prints out the all the contents of the the `SRR098026.fastq` to the screen.
+This prints out the all the contents of the the `SraRunTable.txt` to the screen.
 
 > `cat` stands for concatenate; it has many uses and printing the contents of a files onto the terminal is one of them.
 
 What does this file contain?
 
+`cat` is a terrific command, but when the file is really big, it should be avoided; `less`, is preferred for files larger than a few bytes. Let's take a look at the fastq files in `~/dc_sample_data/untrimmed_fastq`. These files are quite large, so we probably do not want to use the `cat` command to look at them. Instead, we can use the `less` command. 
 
-****
-**Exercises**
-
-From your home directory, without changing directories,
-    use one short command to print the contents of all of the files in
-    the `/home/dcuser/dc_sample_data/untrimmed_fastq` directory.
-
-***
-
-`cat` is a terrific command, but when the file is really big, it should be avoided; `less`, is preferred for files larger than a few bytes. Let's take a look at the fastq files in `untrimmed_fastq`. These files are quite large, so we probably do not want to use the `cat` command to look at them. Instead, we can use the `less` command. 
-
-Move back to the `untrimmed_fastq` directory and enter the following command:
+Move to the `untrimmed_fastq` directory and enter the following command:
 	
 	$ cd ~/dc_sample_data/untrimmed_fastq/
 	$ less SRR098026.fastq
