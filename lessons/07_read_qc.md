@@ -326,10 +326,10 @@ MINLEN:20
 This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (``SRR097977.fastq``, in this case) and to name the output file ``SRR097977.fastq_trim.fastq``. The program will remove nucleotides using a sliding window of size 4 that will remove those bases if their average quality score is below 20. The entire read will be discarded if the length of the read after trimming drops below 20 nucleotides.
 
 ```bash
-TrimmomaticSE: Started with arguments: -threads 2 SRR097977.fastq SRR097977.fastq_trim.fastq 
-SLIDINGWINDOW:4:20 MINLEN:20
+TrimmomaticSE: Started with arguments: SRR097977.fastq SRR097977.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+Automatically using 2 threads
 Quality encoding detected as phred33
-Input Reads: 249 Surviving: 234 (93.98%) Dropped: 15 (6.02%)
+Input Reads: 4346025 Surviving: 4060625 (93.43%) Dropped: 285400 (6.57%)
 TrimmomaticSE: Completed successfully
 ```
 
