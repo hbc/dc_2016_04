@@ -17,7 +17,7 @@ Approximate time: 120 minutes
 
 To get started with this lesson, make sure you are in `dc_workshop`. Now let's copy over the reference data required for alignment:
 
-```
+```bash
 $ cd ~/dc_workshop
 $ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
 ```
@@ -37,11 +37,13 @@ dc_workshop
         ├── SRR098028.fastq
         ├── SRR098281.fastq
         └── SRR098283.fastq
+ ├── results
+ └── docs
 
 </pre>
 
 You will also need to create directories for the results that will be generated as part of the workflow: 
-```
+```bash
 $ mkdir  results/sai results/sam results/bam results/bcf results/vcf
 ```
 
@@ -60,12 +62,14 @@ We perform read alignment or mapping to determine where in the genome our reads 
 
 ### Index the reference genome
 Our first step is to index the reference genome for use by BWA. *NOTE: This only has to be run once*. The only reason you would want to create a new index is if you are working with a different reference  genome or you are using a different tool for alignment.
-    
-	$ bwa index data/ref_genome/ecoli_rel606.fasta     # This step helps with the speed of alignment
-	
+
+```bash    
+$ bwa index data/ref_genome/ecoli_rel606.fasta     # This step helps with the speed of alignment
+```
+
 Eventually we will loop over all of our files to run this workflow on all of our samples, but for now we're going to work on just one sample in our dataset `SRR098283.fastq`:
 
-```
+```bash
 $ ls -alh ~/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq 
 ```
 
@@ -76,10 +80,9 @@ The alignment process consists of choosing an appropriate reference genome to ma
 Since we are working with short reads we will be using BWA-backtrack. The usage for BWA-backtrack is `bwa aln path/to/ref_genome.fasta path/to/fastq > SAIfile`. This will create a `.sai` file which is an intermediate file containing the suffix array indexes. 
     
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using and try to understand the options.*
-```
-$ bwa aln data/ref_genome/ecoli_rel606.fasta \
-data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
-results/sai/SRR098283.aligned.sai
+
+```bash
+$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR098283.fastq_trim.fastq > results/sai/SRR098283.aligned.sai
 ```
 ## Alignment cleanup
 
