@@ -527,7 +527,7 @@ just nicely put the files in the Trash, they're really gone!
 ***
 **Exercise**
 
-1.  Create a backup directory called `new_backup`
+1.  Change directories to the `untrimmed_fastq` folder and create a backup directory called `new_backup`
 2.  Copy both fastq files files there with 1 command
 
 ***
