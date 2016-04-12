@@ -81,9 +81,10 @@ Since we are working with short reads we will be using BWA-backtrack. The usage 
     
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using and try to understand the options.*
 
-<pre><code>
-$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR098283.fastq_trim.fastq > results/sai/SRR098283.aligned.sai`
-</code></pre>
+```bash
+$ bwa aln data/ref_genome/ecoli_rel606.fasta \
+    data/trimmed_fastq/SRR098283.fastq_trim.fastq > results/sai/SRR098283.aligned.sai
+```
 
 ## Alignment cleanup
 
@@ -109,26 +110,30 @@ The file begins with a **header**, which is optional. The header is used to desc
 ![sam_bam2](../img/sam_bam3.png)
 
 First we will use the `bwa samse` command to convert the .sai file to SAM format:
-```
+
+```bash
 $ bwa samse data/ref_genome/ecoli_rel606.fasta \
-results/sai/SRR098283.aligned.sai \
-data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
-results/sam/SRR098283.aligned.sam
+      results/sai/SRR098283.aligned.sai \
+      data/trimmed_fastq/SRR098283.fastq_trim.fastq > \
+      results/sam/SRR098283.aligned.sam
 ```
 Explore the information within your SAM file:
-```
+
+```bash
 $ head results/sam/SRR098283.aligned.sam
 ```	
 Now convert the SAM file to BAM format for use by downstream tools: 
-```
-$ samtools view -S -b results/sam/SRR098283.aligned.sam > \
-results/bam/SRR098283.aligned.bam
+
+```bash
+$ samtools view -S -b results/sam/SRR098283.aligned.sam > results/bam/SRR098283.aligned.bam
 ```
 ### Sort BAM file by coordinates
 
 Sort the BAM file:
 
-    $ samtools sort -f results/bam/SRR098283.aligned.bam results/bam/SRR098283.aligned.sorted.bam
+```bash
+$ samtools sort -f results/bam/SRR098283.aligned.bam results/bam/SRR098283.aligned.sorted.bam
+```
 
 *SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.*
 
