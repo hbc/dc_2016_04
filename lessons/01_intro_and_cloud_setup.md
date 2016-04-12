@@ -7,6 +7,12 @@ date: 2014-07-30
 
 # Introduction to cloud computing
 
+## Learning Objectives
+* Understand benefits of working on a remote computer system
+* Be able to connect to a cloud instance
+* Introducing the Shell and understanding how to use it
+* Check the available resources and file system on your remote machine
+
 There are a number of reasons why accessing a remote machine is invaluable to any scientists working with large datasets. In the early history of computing, working on a remote machine was standard practice - computers were bulky and expensive. Today we work on laptops that are more powerful than the sum of the world's computing capacity 20 years ago, but many analyses (especially in genomics) won't work on these laptops and must be run on remote machines.
 
 You'll know you need to start working on the cloud when...
@@ -15,47 +21,48 @@ You'll know you need to start working on the cloud when...
 * Your computer is taking hours or days to get through an analysis.
 * You cannot install software on your computer (application does not have support for your operating system, conflicts with other existing applications, etc.)
 
-The cloud is a part of our everyday life (e.g. using Amazon, Google, Netflix, or an ATM involves remote computing). The topic is fascinating but this lesson says '5 minutes or less' so let's get connected.
-
-## Learning Objectives
-* Understand benefits of working on a remote computer system
-* Be able to connect to a cloud instance
-* Check the available resources and file system on your remote machine
+The cloud is a part of our everyday life (e.g. using Amazon, Google, Netflix, or an ATM involves remote computing). The topic is fascinating but **this lesson says '5 minutes or less'** so let's get connected.
 
 ##Setting up
 
 For the duration of this workshop, we will be accessing data and tools required to analyze our data on a remote computer using the **Amazon's Elastic Compute Cloud (EC2)**.
 
-
 ### Connecting to a remote computer using Amazon EC2
 
 This is the first and last place in these lessons where it will matter if you are using PC, Mac, or Linux. After we connect, we will all be on the same operating system/computing environment. 
 
-> To save time, your instructor will have launched an remote computer (instance) for you prior to the workshop. Each instance will have an associated IP adresss listed in the etherpad which you will need to connect to the instance. If you are following these lessons on your own, or after the workshop see the lesson on [cloud computing](https://github.com/datacarpentry/cloud-genomics/tree/gh-pages/lessons) for instructions on how to do this yourself. 
+> To save time, your instructor will have launched an remote computer (instance) for you prior to the workshop. **Each instance will have an associated IP adresss listed in the etherpad which you will need to connect to the instance**. If you are following these lessons on your own, or after the workshop see the lesson on [cloud computing](https://github.com/datacarpentry/cloud-genomics/tree/gh-pages/lessons) for instructions on how to do this yourself. 
 
 #### **User Credentials**
-Credentials are case sensitive:
+To logon to the remote computer you will require the following credentials (*NOTE: they are case sensitive*):
 
 - Username: dcuser
 - Password: data4Carp
 
-#### **Connecting using PC**
-*Prerequisites*: You must have an SSH client. There are several free options and we will use PuTTY [[Download Putty.exe](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)]
+### The Shell
+The *shell* is a program that presents a command line interface which allows you to control your computer using commands entered with a keyboard instead of controlling graphical user interfaces (GUIs) with a mouse/keyboard combination. **The *shell* is an interpreter that helps translate our input into computer language.**
 
-1. Open PuTTY; In the 'Host Name (or IP address)' section paste in the IP address provided by your instructor (or the ip address of an instance you have provisioned yourself). *Keep the default selection 'SSH' and Port (22)*. <br>
-![Putty Image](../img/putty_screenshot_1.png)
-2. Click 'Open' and you will be presented with a security warning. Select 'Yes' to continue to connect. <br>
-![Putty security screen](../img/putty_screenshot_2.png)
-3. In the final step, you will be asked to provide a login and password. **Note:** When typing your password, it is common in Unix/Linux not see see any asterisks (e.g. ****) or moving cursors. Just continue typing.<br> 
-![Putty login](../img/putty_screenshot_3.png)
-4. You should now be connected!
+There are many reasons to learn about the shell.
 
-#### **Connecting using Mac/Linux**
-*Prerequisites*: Mac and Linux operating systems will already have terminals installed. Simply search for 'Terminal' and/or look for the terminal icon.<br> 
+* For most bioinformatics tools, you have to use the shell. There is no graphical interface. If you want to work in metagenomics or genomics you're going to need to use the shell.
+* The shell gives you *power*. The command line gives you the power to do your work more efficiently and
+more quickly.  When you need to do things tens to hundreds of times,
+knowing how to use the shell is transformative.
+* Computational resources that can handle large datasets, such as remote computers or cloud computing, require a working knowledge of Unix.
+
+We will be using the shell on our laptops to connect to the cloud. **How do we access the shell?**
+
+####**Mac users**
+
+The shell is already available on Mac and Linux computers. 
+
+On Mac the shell is available through Terminal
+	`Applications -> Utilities -> Terminal`
+
+Simply search for 'Terminal' and/or look for the terminal icon.<br> 
 ![terminal icon](../img/terminal.png)
 
-
-1. Open the terminal and type the following command substituting 'ip_address' for the IP address your instructor will provide (or the ip address of an instance you have provisioned yourself). *Be sure to pay attention to capitalization and spaces*
+1. Open the terminal and type the following command substituting 'ip_address' for the IP address your instructor will provide. *Be sure to pay attention to capitalization and spaces*
 
         $ ssh dcuser@ip_address
         
@@ -66,6 +73,19 @@ Credentials are case sensitive:
 3. In the final step, you will be asked to provide a login and password. **Note:** When typing your password, it is common in Unix/Linux not see see any asterisks (e.g. ****) or moving cursors. Just continue typing.
 4. You should now be connected!
 
+####**Windows users**
+
+> *Prerequisites*: You must have an SSH client. There are several free options and we will use PuTTY [[Download Putty.exe](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)]
+
+For Windows, you will have downloaded a separate program called PuTTy to allow you to use the shell. 
+
+1. Open PuTTY; In the 'Host Name (or IP address)' section paste in the IP address provided by your instructor (or the ip address of an instance you have provisioned yourself). *Keep the default selection 'SSH' and Port (22)*. <br>
+![Putty Image](../img/putty_screenshot_1.png)
+2. Click 'Open' and you will be presented with a security warning. Select 'Yes' to continue to connect. <br>
+![Putty security screen](../img/putty_screenshot_2.png)
+3. In the final step, you will be asked to provide a login and password. **Note:** When typing your password, it is common in Unix/Linux not see see any asterisks (e.g. ****) or moving cursors. Just continue typing.<br> 
+![Putty login](../img/putty_screenshot_3.png)
+4. You should now be connected!
 
 
 ###**Verifying your connection and environment** 
@@ -106,7 +126,6 @@ dcuser@ip-172-31-62-209 ~ $
 ```
 
 ### Resources on cloud computing
-
 * Amazon EC2: http://aws.amazon.com/ec2/
 * Microsoft Azure: https://azure.microsoft.com/en-us/
 * Google Cloud Platform: https://cloud.google.com/
@@ -114,54 +133,6 @@ dcuser@ip-172-31-62-209 ~ $
 
 Learn more about cloud computing in bioinformatics
 Fusaro VA, Patil P, Gafni E, Wall DP, Tonellato PJ (2011) Biomedical Cloud Computing With Amazon Web Services. PLoS Comput Biol 7(8): e1002147. doi: 10.1371/journal.pcbi.1002147
-
-
-# The Shell
-We are now connected to a remote computer via the shell. Rather than interacting with a graphical user interface where we can point and click, we will need to type in *commands* to let the shell know what it is we are tryimg to accomplish. In the next few lessons we will spend most of our time learning about the basics of the shell by manipulating some experimental data. 
-
-## Learning Objectives
-
-* How do you use the shell?
-* What is it good for?
-* Where are resources where I can learn more? (because the shell is awesome)
-
-## What is the shell?
-
-The *shell* is a program that presents a command line interface
-which allows you to control your computer using commands entered
-with a keyboard instead of controlling graphical user interfaces
-(GUIs) with a mouse/keyboard combination. **The *shell* is an interpreter that helps translate our input into computer language.**
-
-There are many reasons to learn about the shell.
-
-* For most bioinformatics tools, you have to use the shell. There is no
-graphical interface. If you want to work in metagenomics or genomics you're
-going to need to use the shell.
-* The shell gives you *power*. The command line gives you the power to do your work more efficiently and
-more quickly.  When you need to do things tens to hundreds of times,
-knowing how to use the shell is transformative.
-* Computational resources that can handle large datasets, such as remote computers or cloud computing, require a working knowledge of Unix.
-
-
-![Automation](../img/gvng.jpg)
-
-  Unix is user-friendly. It's just very selective about who its friends are.
-
-
-## How to access the shell
-
-The shell is already available on Mac and Linux. For Windows, you'll have to download a separate program. Since we are all now logged on to a remote computer, we all have access to a shell. How we got there is different for everybody:
-
-**Mac users**
-
-On Mac the shell is available through Terminal
-	Applications -> Utilities -> Terminal
-
-Go ahead and drag the Terminal application to your Dock for easy access.
-
-**Windows users**
-
-For Windows, you will have access to the shell using PuTTy
 
 
 ### Resources on the shell
