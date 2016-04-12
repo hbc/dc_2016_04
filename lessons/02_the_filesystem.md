@@ -547,9 +547,9 @@ a FASTA file, but you'll see as we go through other tutorials, there are
 a lot of reasons we'll want to write a file, or edit an existing file.
 
 To write in files, we're going to use the program `nano`. We're going to create
-a file that contains the favorite grep command so you can remember it for later. We'll name this file
-'awesome.sh'.
+a file within your home direcory with the name 'awesome.sh'.
 
+    $ cd
     $ nano awesome.sh
 
 Now you have something that looks like
@@ -566,14 +566,6 @@ Then it asks if you want that file name. Hit 'Enter'.
 
 Now you've written a file. You can take a look at it with `less` or `cat`, or open it up again and edit it.
 
-***
-**Exercise**
-
-Open `awesome.sh` and add "echo AWESOME!" after the grep command and save the file.
-
 We're going to come back and use this file in just a bit.
-
-***
-
 
 
