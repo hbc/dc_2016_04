@@ -254,7 +254,8 @@ directory name. For example, type `cd` to get back to your home directy, then en
 
 The shell will fill in the rest of the directory name for
 `dc_sample_data`. Now go to `dc_sample_data/untrimmed_fastq`
-
+	
+	$ cd un<tab>
 	$ ls SR<tab><tab>
 
 When you hit the first tab, nothing happens. The reason is that there
