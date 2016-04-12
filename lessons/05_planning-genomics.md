@@ -10,11 +10,11 @@ minutes: 20
 * Anticipate strategies we will need to learn in the rest of the lesson set. 
 
 
-There are a variety ways to approach working with a large sequencing dataset. You may be a novice who has not used bioinformatics tools beyond doing BLAST searches. You may have bioinformatics experience with other types of data and are working with high-throughput (NGS) sequence data for the first time. Either way, these lessons for you! In the most important ways, the methods and approaches we need in bioinformatics are the same ones we need at the bench or in the field - *planning, documenting, and organizing* will be the key to good reproducible science. 
+There are a variety of ways to work with a large sequencing dataset. You may be a novice who has not used bioinformatics tools beyond doing BLAST searches. You may have bioinformatics experience with other types of data and are working with high-throughput (NGS) sequence data for the first time. In the most important ways, the methods and approaches we need in bioinformatics are the same ones we need at the bench or in the field - *planning, documenting, and organizing* are the key to good reproducible science. 
 
 ## Discussion Questions
 
-Before we go any further here are some important questions to consider. If you are learning at a workshop, please discuss these questions with your neighbor (this is a good chance to introduce yourself) and your instructors will collect your answers (on minute cards or in the Etherpad).
+Before we go any further here are some important questions to consider. If you are learning at a workshop, please discuss these questions with your neighbor, and your instructors will collect your answers (on minute cards or in the Etherpad).
 
 **Metadata** 
 
@@ -25,14 +25,14 @@ Before we go any further here are some important questions to consider. If you a
 
 1. What challenges do you think you'll face (or have already faced) in working with a large sequence dataset?
 2. What is your strategy for saving and sharing your sequence files?
-3. How can you be sure that your raw data are unintentionally uncorrupted?
+3. How can you be sure that your raw data have not been unintentionally corrupted?
 4. Where/how will you (did you) analyze your data - what software, what computer(s)?
 
 ## Exercises
 
 **A. Sending samples to the facility**
 
-The first step in sending your sample for sequencing will be to complete a form documenting the metadata for the facility. Take a look at the following submission spreadsheet. 
+The first step in sending your sample for sequencing will be to complete a form documenting the metadata for the facility. Take a look at the following example submission spreadsheet. 
 
 [Sample submission sheet](../data/sample_submission.txt)*<br>
 > *Download the file using right-click (PC)/command-click (Mac). This is a tab-delimited text file; try opening it with Excel or another spreadsheet program. 
@@ -40,14 +40,14 @@ The first step in sending your sample for sequencing will be to complete a form 
 **Questions**
 
 1. What are some errors you can spot in the data?
-    -  Typos, missing data, inconstancies?
+    -  Typos, missing data, inconsistencies?
 2. What improvements could be made to the choices in naming?
 3. What are some errors in the spreadsheet that would be difficult to spot? Is there anyway you can test this?
 
 
 **B. Retrieving samples from the facility**
 
-When the data come back from the facility, you will receive some documentation (metadata) as well as the sequence files themselves. Download and examine the following file - here provided as a text file and excel file:
+When the data come back from the sequencing facility, you will receive some documentation (metadata) as well as the sequence files themselves. Download and examine the following example file - here provided as a text file and excel file:
 
 - [Sequencing results - text](../data/sequencing_results_metadata.txt)
 - [Sequencing results - Excel](../data/sequencing_results_metadata.xls)
@@ -66,14 +66,14 @@ Before analysis of data has begun, there are already many potential areas for er
 
 One of Data Carpentry's goals is to help you achieve *competency* in working with bioinformatics. This means that you can accomplish routine tasks, under normal conditions, in an acceptable amount of time. While an expert might be able to get to a solution on instinct alone - taking your time, using Google, and asking for help are all valid ways of solving your problems. As you complete the lessons you'll be able to use all of those methods more efficiently.
 
-## Where to go from here
+## Where to go from here?
 
 What are the minimum metadata standards for your experiment/datatype - 
 
 [Biosharing.org's listing of minimum information standards](https://biosharing.org/standards/?selected_facets=isMIBBI:true&selected_facets=domains_exact:DNA%20sequence%20data)
 
-Why not everyone needs to be an expert in everything - 
+More reading about core competencies - 
 
-L. Welch, F. Lewitter, R. Schwartz, C. Brooksbank, P. Radivojac, B. Gaeta and M. Schneider, **'Bioinformatics Curriculum Guidelines: Toward a Definition of Core Competencies'**, PLoS Comput Biol, vol. 10, no. 3, p. e1003496, 2014.
+L. Welch, F. Lewitter, R. Schwartz, C. Brooksbank, P. Radivojac, B. Gaeta and M. Schneider, **'[Bioinformatics Curriculum Guidelines: Toward a Definition of Core Competencies](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3945096/)'**, PLoS Comput Biol, vol. 10, no. 3, p. e1003496, 2014.
 
 
