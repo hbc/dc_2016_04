@@ -280,7 +280,7 @@ To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.
 
 ### Tab Completion
 
-Tab completion is an important shortcut to know. It allows you to efficiently navigate the file system and help ensure you aren't making any typos.
+Tab completion is an important shortcut to know; it improves efficiency navigating the file system and helps avoid typos.
 
 To practice with tab completion, let's first navigate to your home directory. 
 
