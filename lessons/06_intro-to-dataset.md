@@ -85,7 +85,7 @@ After answering the questions, you should avoid saving this file; we don't want 
 
 Blount, Z.D., Barrick, J.E., Davidson, C.J., Lenski, R.E.
 Genomic analysis of a key innovation in an experimental Escherichia coli population (2012) Nature, 489 (7417), pp. 513-518.  
-[Paper](Lenski_paper.pdf), [Supplemental materials](Lenski-s1.pdf)  
+[Paper](http://www.datacarpentry.org/introduction-genomics/Lenski_paper.pdf), [Supplemental materials](http://www.datacarpentry.org/introduction-genomics/Lenski-s1.pdf)  
 Data on NCBI SRA: [http://www.ncbi.nlm.nih.gov/sra?term=SRA026813](http://www.ncbi.nlm.nih.gov/sra?term=SRA026813)
 
 
