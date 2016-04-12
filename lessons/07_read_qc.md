@@ -146,7 +146,7 @@ To run the fastqc program, we call it from its location in `~/FastQC`.  *FastQC*
 2. Run FastQC on all fastq files in the directory
 
 ```bash
-$ ~/FastQC/fastqc *.fastq
+$ ~/FastQC/fastqc SRR097977.fastq SRR098027.fastq
 ```
 
 Take a quick look at what files were generated:
@@ -241,9 +241,9 @@ You start with 'do', then enter your commands, then end with 'done' to execute t
 
 ```bash
 $ for zip in *.zip
-do
-unzip $zip
-done
+  do
+    unzip $zip
+  done
 ```
 
 Note that in the first line, we create a variable named `zip`.  After that, we call that variable with the syntax `$zip`. `$zip` is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
@@ -254,7 +254,7 @@ once for each file (whose name is stored in the $zip variable). The contents of 
 The 'for loop' is interpreted as a multipart command.  If you press the up arrow
 on your keyboard to recall the command, it will be shown like so:
 ```bash
-    for zip in *.zip; do echo File $zip; unzip $zip; done
+    for zip in *.zip; do unzip $zip; done
 ```
 
 When you check your history later, it will help your remember what you did!
@@ -278,7 +278,7 @@ Because *Trimmomatic* is java based, it is run using the `java -jar path/to/trim
 
 ```bash
 $ java -jar path/to/trimmomatic-0.33.jar SE \
--threads 4 \
+-threads 2 \
 inputfile \
 outputfile \
 OPTION:VALUE... # DO NOT RUN THIS
@@ -315,7 +315,7 @@ For the single fastq file `SRR097977.fastq`, the command is:
 
 ```bash
 $ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE \
--threads 4 \
+-threads 2 \
 SRR097977.fastq \
 SRR097977.fastq_trim.fastq \
 SLIDINGWINDOW:4:20 \
@@ -326,7 +326,7 @@ MINLEN:20
 This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (``SRR097977.fastq``, in this case) and to name the output file ``SRR097977.fastq_trim.fastq``. The program will remove nucleotides using a sliding window of size 4 that will remove those bases if their average quality score is below 20. The entire read will be discarded if the length of the read after trimming drops below 20 nucleotides.
 
 ```bash
-TrimmomaticSE: Started with arguments: -threads 4 SRR097977.fastq SRR097977.fastq_trim.fastq 
+TrimmomaticSE: Started with arguments: -threads 2 SRR097977.fastq SRR097977.fastq_trim.fastq 
 SLIDINGWINDOW:4:20 MINLEN:20
 Quality encoding detected as phred33
 Input Reads: 249 Surviving: 234 (93.98%) Dropped: 15 (6.02%)
@@ -351,10 +351,10 @@ Before we run our `for` loop, let's remove the file that we just created:
 $ rm *trim.fastq
 ```
 ```bash
-$ for infile in *.fastq
+$ for infile in SRR097977.fastq SRR098027.fastq
   do
     outfile=${infile}_trim.fastq
-    java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+    java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 2 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
   done
 ```
 
@@ -378,41 +378,44 @@ Create a script called `qc.sh`:
 ```bash
 #!/bin/bash
 
+# Change directories into the folder with the untrimmed fastq files
 cd ~/dc_workshop/data/untrimmed_fastq/
 
+# Run FastQC on the untrimmed files
 echo "Running fastqc on untrimmed fastq files..."
 ~/FastQC/fastqc *.fastq
 mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
 
+# Move FastQC results
 echo "saving untrimmed results..."
 mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
 mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
 
+# Change directories to the FastQC results folder
 cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 
+# Unzip the FastQC zip files
 echo "Unzipping..."
 for zip in *.zip
 do
   unzip $zip
 done
 
+# Create a summary text file for all FastQC runs
 echo "saving..."
 cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 
+# Run Trimmomatic
 echo "Running Trimmomatic..."
-
 cd ~/dc_workshop/data/untrimmed_fastq/
-
 for infile in *.fastq; do
-
   # Create names for the output trimmed files
 	outfile=$infile\_trim.fastq;
-  
  # Run Trimmomatic command
 	java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20;
-  	
 done
 
+# Move trimmed files to the trimmed fastq folder
 mv *trim.fastq ../trimmed_fastq/
 ```
 ----
