@@ -192,18 +192,22 @@ You will see the **header** which describes the format, when the file was create
 	.
 	.
 	.
-	##bcftools_callVersion=1.2+htslib-1.2.1
-	##bcftools_callCommand=call -cv -O b results/bcf/SRR098283_raw.bcf
-	##bcftools_viewVersion=1.2+htslib-1.2.1
-	##bcftools_viewCommand=view results/bcf/SRR098283_variants.bcf
+	##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+	##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+	##FORMAT=<ID=GL,Number=3,Type=Float,Description="Likelihoods for RR,RA,AA genotypes (R=ref,A=alt)">
+	##FORMAT=<ID=DP,Number=1,Type=Integer,Description="# high-quality bases">
+	##FORMAT=<ID=DV,Number=1,Type=Integer,Description="# high-quality non-reference bases">
+	##FORMAT=<ID=SP,Number=1,Type=Integer,Description="Phred-scaled strand bias P-value">
+	##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
 
 Followed by the **variant information**:
 
-	#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR098283.trimmed.aligned.sorted.bam
-	NC_012967.1     110152  .       T       A       18.0963 .       DP=3;VDB=0.74;SGB=-0.453602;RPB=1;MQB=1;MQSB=1;BQB=1;MQ0F=0;AF1=0.502509;AC1=1;DP4=1,0,0,2;MQ=37;FQ=-7.78372;PV4=0.333333,1,1,0.20326   GT:PL   0/1:48,0,20
-	NC_012967.1     270633  .       G       T       26.7735 .       DP=2;VDB=0.76;SGB=-0.453602;MQ0F=0;AF1=1;AC1=2;DP4=0,0,2,0;MQ=37;FQ=-32.988     GT:PL   1/1:58,6,0
-	NC_012967.1     475173  .       G       C       21.7931 .       DP=2;VDB=0.14;SGB=-0.453602;MQSB=1;MQ0F=0;AF1=1;AC1=2;DP4=0,0,1,1;MQ=37;FQ=-32.988      GT:PL   1/1:53,6,0
-	NC_012967.1     1017485 .       G       T       5.46014 .       DP=5;VDB=0.58;SGB=-0.453602;RPB=0;MQB=1;MQSB=1;BQB=0.5;MQ0F=0;AF1=0.499901;AC1=1;DP4=0,3,2,0;MQ=37;FQ=7.77964;PV4=0.1,0.268358,1,1      GT:PL   0/1:34,0,56
+	#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR097977.aligned.sorted.bam
+	NC_012967.1     9972    .       T       G       222     .       DP=28;VDB=8.911920e-02;AF1=1;AC1=2;DP4=0,0,19,7;MQ=36;FQ=-105   GT:PL:GQ        1/1:255,78,0:99
+	NC_012967.1     10563   .       G       A       222     .       DP=27;VDB=6.399241e-02;AF1=1;AC1=2;DP4=0,0,8,18;MQ=36;FQ=-105   GT:PL:GQ        1/1:255,78,0:99
+	NC_012967.1     81158   .       A       C       222     .       DP=37;VDB=2.579489e-02;AF1=1;AC1=2;DP4=0,0,15,21;MQ=37;FQ=-135  GT:PL:GQ        1/1:255,108,0:99
+	NC_012967.1     216480  .       C       T       222     .       DP=39;VDB=2.356774e-01;AF1=1;AC1=2;DP4=0,0,19,17;MQ=36;FQ=-135  GT:PL:GQ        1/1:255,108,0:99
+	NC_012967.1     247796  .       T       C       221     .       DP=18;VDB=1.887634e-01;AF1=1;AC1=2;DP4=0,0,7,11;MQ=35;FQ=-81    GT:PL:GQ        1/1:254,54,0:99
 
 The first columns represent the information we have about a predicted variation. 
 
@@ -216,7 +220,6 @@ REF and ALT represent the genotype at the reference and in the sample, always on
 QUAL then is the Phred scaled probablity that the observed variant exists at this site. Ideally you would need nothing else to filter out bad variant calls, but in reality we still need to filter on multiple other metrics. 
 
 The FILTER field is a `.`, i.e. no filter has been applied, otherwise it will be set to either PASS or show the (quality) filters this variant failed. 
-
 
 
 The last columns contains the genotypes and can be a bit more tricky to decode. In brief, we have:
@@ -234,7 +237,7 @@ The BROAD's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=126
 
 ## Assess the alignment (visualization) - optional step
 
-Index the BAM file for visualization with IGV:
+In order for us to look at the alignment files in a genome browser, we will need to index the BAM file using `samtools`:
 
 ```bash
 $ samtools index results/bam/SRR097977.aligned.sorted.bam
@@ -258,5 +261,13 @@ Using FileZilla, transfer the following 4 files to your local machine:
 * Start [IGV](https://www.broadinstitute.org/software/igv/download)
 * Load the genome file into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
 * Load the .bam file using the **"Load from File..."** option under the **"File"** pull-down menu. *IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, but there is no direct use for that file.*
+* Load in the VCF file using the **"Load from File..."** option under the **"File"** pull-down menu
+
+
+Your IGV browser should look like the screenshot below:
+
+![IGV](../img/igv_screenshot.png)
+
+
 
 
