@@ -266,7 +266,15 @@ Using FileZilla, transfer the following 4 files to your local machine:
 
 Your IGV browser should look like the screenshot below:
 
-![IGV](../img/igv_screenshot.png)
+![IGV](../img/igv-screenshot.png)
+
+There should be two tracks: one coresponding to your BAM file and the other for your VCF file. 
+
+In the **VCF track**, each bar across the top of the plot shows the allele fraction for a single locus. The second bar will show the genotypes for each locus in each *sample*. We only have one sample called here so we only see a single line. Dark blue = heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are transparent.
+
+Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information corresponds to alignment information at those loci.
+
+
 
 
 
