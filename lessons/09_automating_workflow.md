@@ -73,24 +73,28 @@ We can specify a filename as input using **positional parameters**. Positional p
 
 The command-line arguments $1, $2, $3,...$9 are positional parameters, with $0 pointing to the actual command, program or shell script, and $1, $2, $3, ...$9 as the arguments to the command." This basically means that "Script Name" == $0, "First Parameter" == $1, "Second Parameter" == $2 and so on...
 
-At the start of the script let's create a variable that captures an input parameter that must be supplied with the script name, when the user is running it. This input parameter will be the name of the file we want to work on:
-	
-	# Get input file	
-	fq=$1
+At the start of the script let's create a variable that captures an input parameter that must be supplied with the script name, when the user is running it. This input parameter will be the name of the file we want to work on. Let's also now specifiy where we will be getting the input data from:
 
+```bash
+# Get input file and locations  
+fq=$1
+data=data/trimmed_fastq
+```
 
 ### Naming files (ouput files)
 But, wait! What about the ouput files? They are all named using the SRA ID from the original FASTQ file. We can use a unix command to extract the base name of the file (without the path and .fastq extension) and ue this for naming all of the output files. We'll assign it to the `$base` variable:
 
-	# Grab base of filename for future naming
-	base=`basename $fq trim.fastq`
+```bash
+# Grab base of filename for future naming
+base=`basename $fq trim.fastq`
+```
 
 Now, wherever we see an output file that contains `SRR097977` we can substitute that with `$base`, and where the input file is required we replace that with `$fq`. For example:
 
-
-	# Align the reads using BWA
-	bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/$fq >  results/sai/$base.aligned.sai
-
+```bash
+# Align the reads using BWA
+bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/$fq >  results/sai/$base.aligned.sai
+```
 
 ### Assigning ouput file locations to variables
 We can go a step further in flexibility. Since we've already created our output directories, we can now specify all of the paths for our output files in their proper locations. We will assign various **filenames and location to variables** both for convenience but also to make it easier to see what  is going on in the command below.
@@ -112,9 +116,10 @@ final_variants=results/vcf/$base_final_variants.vcf
 ### Genome reference variable
 We can also add a **shortcut** to store the location to the **genome reference** FASTA file. Now for commands that use the genome (i.e bwa and samtools) we can run them using the genome variable (`$genome`) so these values are not static and hard-coded.
 
-     # location to genome reference FASTA file
-     genome=data/ref_genome/ecoli_rel606.fasta
-
+```bash
+# location to genome reference FASTA file
+genome=data/ref_genome/ecoli_rel606.fasta
+```
 
 
 ### Usage and commenting
@@ -139,13 +144,13 @@ Now, walking thru the code, we can make some substitutions as described above. W
 
 cd ~/dc_workshop
 
-# Get input file	
+# Get input file and locations  
 fq=$1
-
+data=data/trimmed_fastq
 
 # Grab base of filename for future naming
-base=`basename $fq .fastq`
-
+base=`basename $fq .fastq_trim.fastq`
+echo "Starting analysis of" $base
 
 # set up output filenames and locations
 sai=results/sai/$base.aligned.sai
@@ -162,10 +167,10 @@ genome=data/ref_genome/ecoli_rel606.fasta
 ### Alignmemt
 
 # Align the reads using BWA
- bwa aln $genome data/trimmed_fastq/$fq > $sai
+bwa aln $genome $data/${base}.fastq_trim.fastq > $sai
 
 # Convert the .sai file to SAM
-bwa samse $genome $sai $fq > $sam
+bwa samse $genome $sai $data/${base}.fastq_trim.fastq > $sam
 
 # Convert the SAM file to BAM
 samtools view -S -b $sam >  $bam
