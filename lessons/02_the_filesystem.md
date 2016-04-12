@@ -469,8 +469,7 @@ file use:
 
 ## Creating, moving, copying, and removing
 
-Now we can move around in the file structure, look at files, search files,
-redirect. But what if we want to do normal things like copy files or move
+Now we can move around in the file structure, look at files, and search files. But what if we want to do normal things like copy files or move
 them around or get rid of them. 
 
 Our raw data in this case is fastq files.  We don't want to change the original files,
