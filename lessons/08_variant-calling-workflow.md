@@ -81,8 +81,9 @@ Since we are working with short reads we will be using BWA-backtrack. The usage 
     
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using and try to understand the options.*
 
-`$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR098283.fastq_trim.fastq > results/sai/SRR098283.aligned.sai`
-
+<pre><code>
+$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR098283.fastq_trim.fastq > results/sai/SRR098283.aligned.sai`
+</code></pre>
 
 ## Alignment cleanup
 
