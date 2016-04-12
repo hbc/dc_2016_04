@@ -20,7 +20,7 @@ Microbes are ideal organisms for exploring 'Long-term Evolution Experiments' (LT
 
 Strains from generation 0 to generation 40,000 were sequenced, including ones that were both Cit+ and Cit- after generation 31,000.
 
-For the purposes of this workshop we're going to be working with 6 of the sequence reads from this experiment. We also made up genome sizes for each of the strains, to look at the relationship between Cit status and genome size.  **The genome sizes are not real data!!**
+For the purposes of this workshop we're going to be working with 6 of the samples from this experiment. We also made up genome sizes for each of the strains, to look at the relationship between Cit status and genome size.  **The genome sizes are not real data!!**
 
 
 | SRA Run Number | Clone | Generation | Cit | GenomeSize |
