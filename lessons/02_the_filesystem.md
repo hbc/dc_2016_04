@@ -86,8 +86,8 @@ or folders at the command line. You are probably accustomed to navigating around
 
 Let's practice moving around a bit. Previously, we moved to the `untrimmed_fastq` directory.
 
-First we changed directories from the folder of our username (dcuser) to
-`dc_sample_data` then to `untrimmed_fastq`
+To get there, we first changed directories from the folder of our username (dcuser) to
+`dc_sample_data` then we changed directories to `untrimmed_fastq`
 
 Let's draw out how that went.
 
