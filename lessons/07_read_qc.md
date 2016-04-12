@@ -412,7 +412,7 @@ for infile in *.fastq; do
   # Create names for the output trimmed files
 	outfile=$infile\_trim.fastq;
  # Run Trimmomatic command
-	java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20;
+	java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 2 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20;
 done
 
 # Move trimmed files to the trimmed fastq folder
