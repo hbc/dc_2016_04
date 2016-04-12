@@ -261,7 +261,7 @@ When you check your history later, it will help your remember what you did!
 
 #### Document your work
 
-To save a record, let's `cat` all `fastqc summary.txt` files into one `full_report.txt` and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we said `cat` is really meant for concatenating text files?
+To save a record, let's `cat` all fastqc `summary.txt` files into one `fastqc_summaries.txt` and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we said `cat` is really meant for concatenating text files?
 
 ```bash    
 $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
