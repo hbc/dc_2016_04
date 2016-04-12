@@ -241,9 +241,9 @@ You start with 'do', then enter your commands, then end with 'done' to execute t
 
 ```bash
 $ for zip in *.zip
-> do
-> unzip $zip
-> done
+do
+unzip $zip
+done
 ```
 
 Note that in the first line, we create a variable named `zip`.  After that, we call that variable with the syntax `$zip`. `$zip` is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
