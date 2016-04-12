@@ -84,12 +84,10 @@ or folders at the command line. You are probably accustomed to navigating around
 
 ### Moving around the file system
 
-Let's practice moving around a bit.
+Let's practice moving around a bit. Previously, we moved to the `untrimmed_fastq` directory.
 
-We're going to work in that `dc_sample_data` directory.
-
-First we did something like go to the folder of our username. Then we opened
-`dc_sample_data` then `untrimmed_fastq`
+First we changed directories from the folder of our username (dcuser) to
+`dc_sample_data` then to `untrimmed_fastq`
 
 Let's draw out how that went.
 
@@ -114,7 +112,7 @@ Type:
 
 This puts you in your home directory. No matter where you are in the directory system, `cd` will always bring you back to your home directory.
 
-Now using `cd` and `ls`, go in to the `dc_sample_data` directory and list its contents.
+Now using `cd` and `ls`, go in to the `untrimmed_fastq` directory and list its contents. 
 
 Let's also check to see where we are. Sometimes when we're wandering around
 in the file system, it's easy to lose track of where we are and get lost.
