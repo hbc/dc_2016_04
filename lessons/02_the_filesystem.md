@@ -46,8 +46,10 @@ Anything with a "/" after it is a directory. Things with a "*" after them are pr
 
 You can also use the command `ls -l` to see whether items in a directory are files or directories. 
 
-    $ ls -l
-    
+```bash
+$ ls -l
+```
+
     drwxr-x--- 2 dcuser dcuser 4096 Jul 30 11:37 sra_metadata
     drwxr-xr-x 2 dcuser dcuser 4096 Jul 30 11:38 untrimmed_fastq
 
@@ -55,10 +57,12 @@ You can also use the command `ls -l` to see whether items in a directory are fil
 
 Let's go into the `untrimmed_fastq` directory and see what is in there.
 
-    $ cd untrimmed_fastq
+```bash
+$ cd untrimmed_fastq
     
-    $ ls -F
-    
+$ ls -F
+```
+
     SRR097977.fastq  SRR098026.fastq
 
 There are two items in this directory with no trailing slashes, so they are files.
@@ -74,7 +78,9 @@ which shows everything, including hidden files.
 How do we know what arguments are available for particular commands? Most commonly used shell programs have a manual. You can access the
 manual using the `man` program. Try entering:
 
-    $ man ls
+```bash
+$ man ls
+```
 
 This will open the manual page for `ls`. Use the `space key` to go forward and `b` to go backwards. When you are done reading, just hit `q` to quit.
 
@@ -113,7 +119,9 @@ Now let's go do that same navigation at the command line.
 
 Type:
 
-	$ cd
+```bash
+$ cd
+```
 
 This puts you in your home directory. No matter where you are in the directory system, `cd` will always bring you back to your home directory.
 
@@ -124,7 +132,9 @@ in the file system, it's easy to lose track of where we are and get lost.
 
 If you want to know what directory you're currently in, type:
 
-	$ pwd
+```bash
+$ pwd
+```
 
 This stands for 'print working directory'. The directory you're currently working in.
 
@@ -135,7 +145,9 @@ To go 'back up a level' we need to use `..`
 
 Type
 
-	$ cd ..
+```bash
+$ cd ..
+```
 
 > `..` denotes parent directory, and you can use it anywhere in the system to go back to the parent directory.
 
@@ -172,13 +184,17 @@ directory in `home` which is a directory in `/`.
 
 Now enter the following command:
 
-	$ cd /home/dcuser/dc_sample_data/.hidden
+```bash
+$ cd /home/dcuser/dc_sample_data/.hidden
+```
 
 This jumps to `.hidden`. Now go back to the home directory (`cd`). 
 
 Now type the following:
 
-	$ cd dc_sample_data/.hidden
+```bash
+$ cd dc_sample_data/.hidden
+```
 
 This command had the same effect as the previous command - taking us to the `hidden` directory. But instead of specifying the full path
 (`/home/dcuser/dc_sample_data/.hidden`), we specified a *relative path*. In
@@ -216,22 +232,28 @@ Navigate to the home directory if you are not already there.
 
 Type:
 
-	$ cd
+```bash
+$ cd
+```
 
 Then enter the command:
 
-	$ ls dc_sample_data
+```bash
+$ ls dc_sample_data
+```
 
 This will list the contents of the `dc_sample_data` directory without
 you having to navigate there.
 
 The `cd` command works in a similar way. Try entering:
 
-	$ cd
+```bash
+$ cd
 	
-	$ cd dc_sample_data/untrimmed_fastq
+$ cd dc_sample_data/untrimmed_fastq
 	
-	$ pwd
+$ pwd
+```
 
 You will jump directly to `untrimmed_fastq` without having to step through
 the intermediate directory.
@@ -250,25 +272,33 @@ Dealing with the home directory is very common. So, in the shell the tilde chara
 "~", is a shortcut for your home directory. Navigate to the `dc_sample_data/sra_metadata/`
 directory:
 
-	$ cd
+```bash 
+$ cd
 	
-	$ cd dc_sample_data/sra_metadata/
+$ cd dc_sample_data/sra_metadata/
+```
 
 Then enter the command:
 
-	$ ls ~
+```bash
+$ ls ~
+```
 
 This prints the contents of your home directory, without you having to
 type the full path. 
 
 Another shortcut is the "..", which we encountered earlier:
 
-	$ ls ..
-	
+```bash
+$ ls ..
+```
+
 The shortcut `..` always refers to the directory above your current directory. So, it prints the contents of the `/home/dcuser/dc_sample_data`. You can chain
 these together, so:
 
-	$ ls ../../
+```bash
+$ ls ../../
+```
 
 prints the contents of `/home/dcuser` which is your home
 directory. 
@@ -276,8 +306,10 @@ directory.
 Finally, the special directory `.` always refers to your
 current directory. 
 
-	$ ls .
-	
+```bash
+$ ls .
+```
+
 So, `ls`, `ls .`, and `ls ././././.` all do the
 same thing, they print the contents of the current directory. This may seem like a useless shortcut right now, but it is needed to specify a destination, e.g. `cp ../data/counts.txt .` or `mv ~/james-scripts/parse-fasta.sh .`.
 
@@ -289,20 +321,26 @@ Tab completion is an important shortcut to know; it improves efficiency navigati
 
 To practice with tab completion, let's first navigate to your home directory. 
 
-	$ cd
+```bash
+$ cd
+```
 
 Typing out directory names can waste a
 lot of time. When you start typing out the name of a directory, then
 hit the tab key, the shell will try to fill in the rest of the
 directory name. For example, type `cd` to get back to your home directy, then enter:
 
-	$ cd dc_<tab>
+```bash
+$ cd dc_<tab>
+```
 
 The shell will fill in the rest of the directory name for
 `dc_sample_data`. Now go to `dc_sample_data/untrimmed_fastq`
 	
-	$ cd un<tab>
-	$ ls SR<tab><tab>
+```bash
+$ cd un<tab>
+$ ls SR<tab><tab>
+```
 
 When you hit the first tab, nothing happens. The reason is that there
 are multiple directories in the home directory which start with
@@ -318,17 +356,23 @@ The `*` character is a shortcut for "everything". Thus, if
 you enter `ls *`, you will see all of the contents of a given
 directory. Now try this command:
 
-	$ ls *fastq
+```bash
+$ ls *fastq
+```
 
 This lists every file that ends with a `fastq`. This command:
 	
-	$ ls SRR*
+```bash
+$ ls SRR*
+```
 
-Lists every file in that starts with the characters `SRR`.
+lists every file in that starts with the characters `SRR`. 
 
-    $ ls *977.fastq
+```bash
+$ ls *977.fastq
+```
 
-lists only the file that ends with '977.fastq'
+Lists only the file that ends with '977.fastq'
 
 So how does this actually work? Well...when the shell (bash) sees a
 word that contains the `*` character, it automatically looks for filenames
@@ -336,8 +380,10 @@ that match the given pattern.
 
 We can use the command 'echo' to see wilcards are they are intepreted by the shell.
 
-	$ echo *.fastq
-	
+```bash
+$ echo *.fastq
+```
+
 	SRR097977.fastq SRR098026.fastq
 
 The '*' is expanded to include any file that ends with '.fastq'
@@ -374,7 +420,9 @@ is very useful.
 
 You can also review your recent commands with the `history` command.  Just enter:
 
-	$ history
+```bash
+$ history
+```
 
 to see a numbered list of recent commands, including this just issued
 `history` command.  You can reuse one of these commands directly by
@@ -388,7 +436,9 @@ If your history looked like this:
 
 then you could repeat command #260 by simply entering:
 
-	$ !260
+```bash
+$ !260
+```
 
 (that's an exclamation mark).  You will be glad you learned this when you try to re-run very complicated commands.
 
@@ -409,8 +459,10 @@ contents of directories, but how do we look at the contents of files?
 The easiest way (but really not the ideal way in most situations) to examine a file is to just print out all of the
 contents using the command `cat`. Enter the following command:
 	
-	$ cd ~/dc_sample_data/sra_metadata
-	$ cat SraRunTable.txt 
+```bash
+$ cd ~/dc_sample_data/sra_metadata
+$ cat SraRunTable.txt 
+```
 
 This prints out the all the contents of the the `SraRunTable.txt` to the screen.
 
@@ -422,8 +474,10 @@ What does this file contain?
 
 Move to the `untrimmed_fastq` directory and enter the following command:
 	
-	$ cd ~/dc_sample_data/untrimmed_fastq/
-	$ less SRR098026.fastq
+```bash
+$ cd ~/dc_sample_data/untrimmed_fastq/
+$ less SRR098026.fastq
+```
 
 `less` opens the file, and lets you navigate through it. The commands
 are identical to the `man` program.
@@ -461,16 +515,19 @@ to see the beginning or end of the file, or see how it's formatted.
 The commands are `head` and `tail` and they just let you look at
 the beginning and end of a file respectively.
 
-	$ head SRR098026.fastq
+```bash
+$ head SRR098026.fastq
 
-	$ tail SRR098026.fastq
+$ tail SRR098026.fastq
+```
 
 The `-n` option to either of these commands can be used to print the
 first or last `n` lines of a file. To print the first line of the
 file use:
 
-	$ head -n 1 SRR098026.fastq
-
+```bash
+$ head -n 1 SRR098026.fastq
+```
 
 ## Creating, moving, copying, and removing
 
@@ -482,10 +539,12 @@ so let's make a copy to work with.
 
 Lets copy the file using the `cp` command. The copy command requires 2 things, the name of the file to copy, and the location to copy it to. Navigate to the `untrimmed_fastq` directory and enter:
 
-	$ cp SRR098026.fastq SRR098026-copy.fastq
+```bash
+$ cp SRR098026.fastq SRR098026-copy.fastq
 	
-    $ ls -F
-    
+$ ls -F
+```
+
     SRR097977.fastq  SRR098026-copy.fastq  SRR098026.fastq 
 
 Now SRR098026-copy.fastq has been created as a copy of SRR098026.fastq
@@ -495,15 +554,19 @@ Let's make a `backup` directory where we can put this file.
 The `mkdir` command is used to make a directory. Just enter `mkdir`
 followed by a space, then the directory name.
 
-    $ mkdir backup
+```bash
+$ mkdir backup
+```
 
 We can now move our backed up file in to this directory. We can
 move files around using the command `mv`. Enter this command:
 
-    $ mv *-copy.fastq backup
+```bash
+$ mv *-copy.fastq backup
     
-    $ ls -al backup
-    
+$ ls -al backup
+```
+
     total 52
     drwxrwxr-x 2 dcuser dcuser  4096 Jul 30 15:31 .
     drwxr-xr-x 3 dcuser dcuser  4096 Jul 30 15:31 ..
@@ -512,17 +575,21 @@ move files around using the command `mv`. Enter this command:
 The `mv` command is also how you rename files. Since this file is so
 important, let's rename it:
 
-	$ cd backup
+```bash
+$ cd backup
 	
-    $ mv SRR098026-copy.fastq SRR098026-copy.fastq_DO_NOT_TOUCH!
+$ mv SRR098026-copy.fastq SRR098026-copy.fastq_DO_NOT_TOUCH!
     
-    $ ls 
-    
+$ ls 
+```
+
     SRR098026-copy.fastq_DO_NOT_TOUCH!
 
 Finally, we decided this was silly and want to start over.
 
-    rm SRR098026-copy.fastq_DO_NOT_TOUCH!
+```bash
+$ rm SRR098026-copy.fastq_DO_NOT_TOUCH!
+```
 
 > The `rm` file permanently removes the file. Be careful with this command. The shell doesn't
 just nicely put the files in the Trash, they're really gone!
@@ -541,9 +608,11 @@ By default, `rm`, will NOT delete directories. You can tell `rm` to
 delete a directory using the `-r` option. Let's delete our `backup` and `new_backup` directories
 we just made. Enter the following command:
 
-	$ rm -r backup
-	$ rm -r new_backup
-	
+```bash
+$ rm -r backup
+$ rm -r new_backup
+```
+
 ## Writing files
 
 We've been able to do a lot of work with files that already exist, but what
@@ -554,8 +623,10 @@ a lot of reasons we'll want to write a file, or edit an existing file.
 To write in files, we're going to use the program `nano`. We're going to create
 a file within your home direcory with the name 'awesome.sh'.
 
-    $ cd
-    $ nano awesome.sh
+```bash
+$ cd
+$ nano awesome.sh
+```
 
 Now you have something that looks like
 
