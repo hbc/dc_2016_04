@@ -269,7 +269,11 @@ prints the contents of `/home/dcuser` which is your home
 directory. 
 
 Finally, the special directory `.` always refers to your
-current directory. So, `ls`, `ls .`, and `ls ././././.` all do the
+current directory. 
+
+	$ ls .
+	
+So, `ls`, `ls .`, and `ls ././././.` all do the
 same thing, they print the contents of the current directory. This may seem like a useless shortcut right now, but it is needed to specify a destination, e.g. `cp ../data/counts.txt .` or `mv ~/james-scripts/parse-fasta.sh .`.
 
 To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.`, and `ls /home/dcuser` all do exactly the same thing. These shortcuts are not necessary, but they are really convenient!
