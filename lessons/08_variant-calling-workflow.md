@@ -242,7 +242,9 @@ $ samtools index results/bam/SRR098283.aligned.sorted.bam
 
 **Transfer files to your laptop**
 
-Using FileZilla, transfer the following 3 files to your local machine, 
+Using FileZilla, transfer the following 3 files to your local machine:
+
+
 `results/bam/SRR098283.aligned.sorted.bam`
 
 `results/bam/SRR098283.aligned.sorted.bam.bai`
