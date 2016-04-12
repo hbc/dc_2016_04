@@ -105,7 +105,7 @@ We can go a step further in flexibility. Since we've already created our output 
 sai=results/sai/$base.aligned.sai
 sam=results/sam/$base.aligned.sam
 bam=results/bam/${base}_aligned.bam
-sorted_bam=results/bam/$base.aligned.sorted.bam
+sorted_bam=results/bam/$base.aligned.sorted
 raw_bcf=results/bcf/$base_raw.bcf
 variants=results/bcf/$base_variants.bcf
 final_variants=results/vcf/$base_final_variants.vcf
