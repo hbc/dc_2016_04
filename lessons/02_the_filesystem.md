@@ -237,34 +237,7 @@ the intermediate directory.
 List the 'SRR097977.fastq' file from your home directory without changing directories
 ****
 
-## Saving time with other shortcuts
-
-### Shortcut: Tab Completion
-
-Navigate to the home directory. 
-
-	$ cd
-
-Typing out directory names can waste a
-lot of time. When you start typing out the name of a directory, then
-hit the tab key, the shell will try to fill in the rest of the
-directory name. For example, type `cd` to get back to your home directy, then enter:
-
-	$ cd dc_<tab>
-
-The shell will fill in the rest of the directory name for
-`dc_sample_data`. Now go to `dc_sample_data/untrimmed_fastq`
-	
-	$ cd un<tab>
-	$ ls SR<tab><tab>
-
-When you hit the first tab, nothing happens. The reason is that there
-are multiple directories in the home directory which start with
-`SR`. Thus, the shell does not know which one to fill in. When you hit
-tab again, the shell will list the possible choices.
-
-
-### Shortcuts: Other
+## Saving time with shortcuts
 
 There are several shortcuts which you should know about, but today we are going to talk about only a few. As you continue to work with the shell and on the terminal a lot more, you will come across and hopefully adapt many other shortcuts. 
 
@@ -301,6 +274,29 @@ same thing, they print the contents of the current directory. This may seem like
 
 To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.`, and `ls /home/dcuser` all do exactly the same thing. These shortcuts are not necessary, but they are really convenient!
 
+### Tab Completion
+
+Navigate to the home directory. 
+
+	$ cd
+
+Typing out directory names can waste a
+lot of time. When you start typing out the name of a directory, then
+hit the tab key, the shell will try to fill in the rest of the
+directory name. For example, type `cd` to get back to your home directy, then enter:
+
+	$ cd dc_<tab>
+
+The shell will fill in the rest of the directory name for
+`dc_sample_data`. Now go to `dc_sample_data/untrimmed_fastq`
+	
+	$ cd un<tab>
+	$ ls SR<tab><tab>
+
+When you hit the first tab, nothing happens. The reason is that there
+are multiple directories in the home directory which start with
+`SR`. Thus, the shell does not know which one to fill in. When you hit
+tab again, the shell will list the possible choices.
 
 ### Wild cards
 
@@ -353,7 +349,6 @@ navigating to a different directory.
 	BONUS: List all of the files in '/bin' that contain the letter 'a' or 'c'
 
 ****
-
 
 ## Command History
 
