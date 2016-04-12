@@ -465,7 +465,6 @@ first or last `n` lines of a file. To print the first/last line of the
 file use:
 
 	$ head -n 1 SRR098026.fastq
-	$ tail -n 1 SRR098026.fastq
 
 
 ## Creating, moving, copying, and removing
