@@ -352,10 +352,10 @@ $ rm *trim.fastq
 ```
 ```bash
 $ for infile in *.fastq
-do
-outfile=${infile}_trim.fastq
-java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
-done
+  do
+    outfile=${infile}_trim.fastq
+  java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 4 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+  done
 ```
 
 Do you remember how the first specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called 'infile'.  Note that the third line of this for loop is creating a second variable called 'outfile'.  We assign it the value of $infile with '_trim.fastq' appended to it.  The variable is wrapped in curly brackets '{}' so the shell knows that whatever follows is not part of the variable name $infile.  There are no spaces before or after the '='.
