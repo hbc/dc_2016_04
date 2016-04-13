@@ -252,7 +252,7 @@ once for each file (whose name is stored in the $zip variable). The contents of 
 The 'for loop' is interpreted as a multipart command.  If you press the up arrow
 on your keyboard to recall the command, it will be shown like so:
 ```bash
-    for zip in *.zip; do unzip $zip; done
+for zip in *.zip; do unzip $zip; done
 ```
 
 When you check your history later, it will help your remember what you did!
@@ -348,6 +348,7 @@ Before we run our `for` loop, let's remove the file that we just created:
 ```bash
 $ rm *trim.fastq
 ```
+
 ```bash
 $ for infile in SRR097977.fastq SRR098027.fastq
   do
@@ -360,18 +361,24 @@ In the 'for loop', do you remember how a variable is assigned the value of each 
 
 Now let's keep our directory organized. Make a directory for the trimmed fastq files: 
 
-`$ mkdir ../trimmed_fastq`
+```bash
+$ mkdir ../trimmed_fastq
+```
 
 Move the trimmed fastq files to the new directory:
 
-`$ mv *trim.fastq ../trimmed_fastq/`
+```bash
+$ mv *trim.fastq ../trimmed_fastq/
+```
 
 ## Automating the QC workflow
 Now that we know how to use the tools to perform the QC, let's automate the process using a shell script. We will use the same commands, with a few extra "echo" statements to give us feedback.
 
 Create a script called `qc.sh`:
 
-	$ nano qc.sh
+```bash
+$ nano qc.sh
+```
 
 ```bash
 #!/bin/bash
