@@ -143,7 +143,8 @@ Now that we have our directory structure set up, and we know about what informat
 $ cd data/untrimmed_fastq/
 ```
 To run the fastqc program, we call it from its location in `~/FastQC`.  *FastQC* will accept multiple file names as input, so we can use the *.fastq wildcard.
-2. Run FastQC on all fastq files in the directory
+
+2. Run FastQC on **two fastq files** in the directory:
 
 ```bash
 $ ~/FastQC/fastqc SRR097977.fastq SRR098027.fastq
@@ -418,7 +419,8 @@ for infile in *.fastq; do
   # Create names for the output trimmed files
 	outfile=$infile\_trim.fastq;
  # Run Trimmomatic command
-	java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 2 $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20;
+	java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 2 \
+	$infile $outfile SLIDINGWINDOW:4:20 MINLEN:20;
 done
 
 # Move trimmed files to the trimmed fastq folder
