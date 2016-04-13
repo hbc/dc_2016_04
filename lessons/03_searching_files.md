@@ -259,17 +259,9 @@ the command line, automate something you don't really need to automate.
 
 ## Bonus:
 
-**backtick, xargs**: Example find all files with certain text
-
-**alias** -> rm -i
-
-**variables** -> use a path example
+**alias** 
 
 **.bashrc**
-
-**du**
-
-**ln**
 
 **ssh and scp**
 
@@ -278,3 +270,5 @@ the command line, automate something you don't really need to automate.
 **Permissions**
 
 **Chaining commands together**
+
+**md5sum**
