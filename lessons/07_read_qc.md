@@ -422,5 +422,8 @@ done
 
 # Move trimmed files to the trimmed fastq folder
 mv *trim.fastq ../trimmed_fastq/
+
+# Run FastQC on all trimmed files
+~/FastQC/fastqc ../trimmed_fastq/*.fastq
 ```
 ----
