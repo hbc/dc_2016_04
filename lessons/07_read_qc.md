@@ -225,7 +225,7 @@ The **"Overrepresented sequences"** table displays the sequences (at least 20 bp
 
 Let's go back to the terminal now. The other output of FastQC is a .zip file. These .zip files need to be unpacked with the `unzip` program. If we try to `unzip` them all at once:
 ```bash
-	$ unzip *.zip
+$ unzip *.zip
 ```
 
 Did it work? 
