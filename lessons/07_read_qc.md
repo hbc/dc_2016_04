@@ -116,21 +116,21 @@ Your future self will thank you.
 
 Create a working directory for your NGS analysis
 ```bash
-	$ cd
-	# this command takes us to the home directory
+$ cd
+# this command takes us to the home directory
 
-	$ mkdir dc_workshop
-	$ cd dc_workshop
+$ mkdir dc_workshop
+$ cd dc_workshop
 ```
 
 Create three subdirectories
 ```bash
-	$ mkdir data docs results
+$ mkdir data docs results
 ```
 
 Move our sample data to our working (home) directory
 ```bash
-	$ mv ~/.dc_sampledata_lite/untrimmed_fastq/ ~/dc_workshop/data/
+$ mv ~/.dc_sampledata_lite/untrimmed_fastq/ ~/dc_workshop/data/
 ```
 
 #### Run FastQC
