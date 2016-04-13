@@ -76,7 +76,7 @@ command, like many commands, takes a lot of arguments. Another useful one is '-a
 which shows everything, including hidden files.
 
 How do we know what arguments are available for particular commands? Most commonly used shell commands have a manual. You can access the
-manual using the `man` program. Try entering:
+manual using the `man` command. Try entering:
 
 ```bash
 $ man ls
