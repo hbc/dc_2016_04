@@ -370,6 +370,7 @@ Move the trimmed fastq files to the new directory:
 ```bash
 $ mv *trim.fastq ../trimmed_fastq/
 ```
+After trimming, we would generally want to run FastQC on our trimmed fastq files, then transfer the files to our machine to make sure the trimming improved the quality of our reads without removing too many of them. 
 
 ## Automating the QC workflow
 Now that we know how to use the tools to perform the QC, let's automate the process using a shell script. We will use the same commands, with a few extra "echo" statements to give us feedback.
