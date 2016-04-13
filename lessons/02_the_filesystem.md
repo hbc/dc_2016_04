@@ -70,12 +70,12 @@ There are two items in this directory with no trailing slashes, so they are file
 
 ### Arguments
 
-Most programs take additional arguments that control their exact
+Most commands take additional arguments that control their exact
 behavior. For example, `-F` and `-l` are arguments to `ls`.  The `ls`
-program, like many programs, take a lot of arguments. Another useful one is '-a',
+command, like many commands, take a lot of arguments. Another useful one is '-a',
 which shows everything, including hidden files.
 
-How do we know what arguments are available for particular commands? Most commonly used shell programs have a manual. You can access the
+How do we know what arguments are available for particular commands? Most commonly used shell commands have a manual. You can access the
 manual using the `man` program. Try entering:
 
 ```bash
