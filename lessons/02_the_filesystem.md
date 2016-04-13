@@ -72,7 +72,7 @@ There are two items in this directory with no trailing slashes, so they are file
 
 Most commands take additional arguments that control their exact
 behavior. For example, `-F` and `-l` are arguments to `ls`.  The `ls`
-command, like many commands, has a lot of arguments available. Another useful one is '-a',
+command, like many commands, takes a lot of arguments. Another useful one is '-a',
 which shows everything, including hidden files.
 
 How do we know what arguments are available for particular commands? Most commonly used shell commands have a manual. You can access the
