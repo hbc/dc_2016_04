@@ -49,7 +49,7 @@ The first step in sending your sample for sequencing will be to complete a form 
 
 When the data come back from the sequencing facility, you will receive some documentation (metadata) as well as the sequence files themselves. Download and examine the following example file - here provided as a text file and excel file:
 
-- [Sequencing results - text](../data/sequencing_results_metadata.txt)
+- [Sequencing results - text](https://raw.githubusercontent.com/hbc/dc_2016_04/master/data/sequencing_results_metadata.txt)
 - [Sequencing results - Excel](../data/sequencing_results_metadata.xls)
 
 **Questions**
