@@ -34,7 +34,7 @@ Before we go any further here are some important questions to consider. If you a
 
 The first step in sending your sample for sequencing will be to complete a form documenting the metadata for the facility. Take a look at the following example submission spreadsheet. 
 
-[Sample submission sheet](../data/sample_submission.txt)*<br>
+[Sample submission sheet](https://raw.githubusercontent.com/hbc/dc_2016_04/master/data/sample_submission.txt)*<br>
 > *Download the file using right-click (PC)/command-click (Mac). This is a tab-delimited text file; try opening it with Excel or another spreadsheet program. 
 
 **Questions**
