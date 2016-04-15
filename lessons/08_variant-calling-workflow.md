@@ -132,7 +132,7 @@ $ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.
 Sort the BAM file:
 
 ```bash
-$ samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted
+$ samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted.bam
 ```
 
 *SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.*
