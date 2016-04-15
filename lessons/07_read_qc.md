@@ -417,7 +417,7 @@ echo "Running Trimmomatic..."
 cd ~/dc_workshop/data/untrimmed_fastq/
 for infile in *.fastq; do
   # Create names for the output trimmed files
-	outfile=$infile\_trim.fastq;
+	outfile=${infile}_trim.fastq;
  # Run Trimmomatic command
 	java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE -threads 2 \
 	$infile $outfile SLIDINGWINDOW:4:20 MINLEN:20;
